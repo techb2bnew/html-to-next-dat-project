@@ -1,0 +1,1062 @@
+/* ==========================================================================
+   B2B Dispatcher Training Simulator Stylesheet
+   Theme: Modern SaaS Dark Navy & Blue Freight Professional Terminal
+   ========================================================================== */
+
+:root {
+  --sim-dark-bg: #0b1329;
+  --sim-navy-card: #1c2541;
+  --sim-navy-light: #3a506b;
+  --sim-accent-blue: #00b4d8;
+  --sim-accent-blue-hover: #0077b6;
+  --sim-glowing-green: #10b981;
+  --sim-bright-red: #f43f5e;
+  --sim-soft-gray: #e2e8f0;
+  --sim-text-main: #f8fafc;
+  --sim-text-muted: #94a3b8;
+  --sim-border: rgba(255, 255, 255, 0.08);
+  --sim-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  --sim-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sim-workspace {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 70px);
+  background: var(--sim-dark-bg);
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--sim-text-main);
+  box-sizing: border-box;
+}
+
+/* Sidebar Styling */
+.sim-sidebar {
+  width: 260px;
+  background: #070c1b;
+  border-right: 1px solid var(--sim-border);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  flex-shrink: 0;
+}
+
+.sim-sidebar-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--sim-accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0 24px 15px 24px;
+  border-bottom: 1px solid var(--sim-border);
+  margin-bottom: 15px;
+}
+
+.sim-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  color: var(--sim-text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--sim-transition);
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.sim-nav-item:hover {
+  color: var(--sim-text-main);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.sim-nav-item.active {
+  color: #fff;
+  background: linear-gradient(90deg, rgba(0, 180, 216, 0.15) 0%, transparent 100%);
+  border-left: 3px solid var(--sim-accent-blue);
+}
+
+/* Main Display Area */
+.sim-viewport {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  background: radial-gradient(circle at top right, #131e3a 0%, #0b1329 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.sim-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--sim-border);
+  padding-bottom: 20px;
+}
+
+.sim-header h1 {
+  font-size: 1.65rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(135deg, #fff 0%, var(--sim-accent-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sim-header p {
+  margin: 5px 0 0 0;
+  color: var(--sim-text-muted);
+  font-size: 0.85rem;
+}
+
+/* Stats HUD widget */
+.sim-hud-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.sim-hud-card {
+  background: var(--sim-navy-card);
+  border: 1px solid var(--sim-border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: var(--sim-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sim-hud-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 4px; height: 100%;
+  background: var(--sim-accent-blue);
+}
+
+.sim-hud-card.revenue::before { background: var(--sim-glowing-green); }
+.sim-hud-card.success::before { background: #fbbf24; }
+
+.sim-hud-label {
+  font-size: 0.75rem;
+  color: var(--sim-text-muted);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.sim-hud-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+/* Load Board Styles */
+.sim-filters-panel {
+  background: var(--sim-navy-card);
+  border: 1px solid var(--sim-border);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: var(--sim-shadow);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.sim-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sim-filter-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--sim-accent-blue);
+  text-transform: uppercase;
+}
+
+.sim-filters-panel input, .sim-filters-panel select {
+  background: #0f172a;
+  border: 1px solid var(--sim-border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: #fff;
+  font-size: 0.85rem;
+  outline: none;
+  transition: var(--sim-transition);
+}
+
+.sim-filters-panel input:focus, .sim-filters-panel select:focus {
+  border-color: var(--sim-accent-blue);
+  box-shadow: 0 0 10px rgba(0, 180, 216, 0.2);
+}
+
+.sim-search-btn {
+  background: var(--sim-accent-blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--sim-transition);
+}
+
+.sim-search-btn:hover {
+  background: var(--sim-accent-blue-hover);
+}
+
+/* Grid Layout */
+.sim-load-grid {
+  background: var(--sim-navy-card);
+  border: 1px solid var(--sim-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--sim-shadow);
+}
+
+.sim-grid-header {
+  display: grid;
+  grid-template-columns: 80px 110px 80px 180px 180px 90px 80px 120px 80px;
+  background: #070c1b;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--sim-border);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--sim-text-muted);
+  text-transform: uppercase;
+}
+
+.sim-load-row {
+  display: grid;
+  grid-template-columns: 80px 110px 80px 180px 180px 90px 80px 120px 80px;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 0.85rem;
+  color: var(--sim-text-main);
+  align-items: center;
+  cursor: pointer;
+  transition: var(--sim-transition);
+}
+
+.sim-load-row:hover {
+  background: rgba(0, 180, 216, 0.05);
+}
+
+.sim-load-rate {
+  font-weight: 800;
+  color: var(--sim-glowing-green);
+}
+
+.sim-load-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sim-load-badge.reefer { background: rgba(0, 180, 216, 0.15); color: var(--sim-accent-blue); }
+.sim-load-badge.van { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.sim-load-badge.flat { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+
+/* Dynamic load side panel drawer */
+.sim-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1500;
+  display: none;
+}
+
+.sim-drawer {
+  position: fixed;
+  top: 0; right: -480px; width: 480px; height: 100vh;
+  background: #0f172a;
+  border-left: 1px solid var(--sim-border);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+  z-index: 1600;
+  transition: right 0.3s ease-out;
+  padding: 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sim-drawer.active {
+  right: 0;
+}
+
+.sim-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--sim-border);
+  padding-bottom: 15px;
+}
+
+.sim-drawer-close {
+  background: none;
+  border: none;
+  color: var(--sim-text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.sim-drawer-section {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--sim-border);
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sim-drawer-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.sim-drawer-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+}
+
+/* Call Simulation HUD layout */
+.sim-call-workspace {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 25px;
+  flex: 1;
+}
+
+.sim-phone-screen {
+  background: radial-gradient(circle at center, #1b263b 0%, #0d1b2a 100%);
+  border-radius: 24px;
+  border: 1px solid var(--sim-border);
+  padding: 40px;
+  box-shadow: var(--sim-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  min-height: 450px;
+}
+
+.sim-avatar-pulse {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--sim-navy-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  position: relative;
+  box-shadow: 0 0 0 0 rgba(0, 180, 216, 0.7);
+}
+
+.sim-avatar-pulse.talking {
+  animation: simPulse 1.5s infinite;
+}
+
+@keyframes simPulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 180, 216, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(0, 180, 216, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 180, 216, 0); }
+}
+
+.sim-call-controls {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.sim-call-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 50px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--sim-transition);
+}
+
+.sim-call-btn.decline {
+  background: var(--sim-bright-red);
+  color: #fff;
+}
+
+.sim-call-btn.mute {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid var(--sim-border);
+}
+
+/* Gmail Workspace layout */
+.sim-email-workspace {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+  background: var(--sim-navy-card);
+  border: 1px solid var(--sim-border);
+  border-radius: 14px;
+  height: 550px;
+  overflow: hidden;
+  box-shadow: var(--sim-shadow);
+}
+
+.sim-email-sidebar {
+  background: #0f172a;
+  border-right: 1px solid var(--sim-border);
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sim-email-nav {
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  color: var(--sim-text-muted);
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--sim-transition);
+}
+
+.sim-email-nav:hover, .sim-email-nav.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.sim-email-feed {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.sim-email-row {
+  display: grid;
+  grid-template-columns: 140px 180px 1fr 100px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--sim-border);
+  font-size: 0.85rem;
+  cursor: pointer;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.sim-email-row.unread {
+  background: rgba(0, 180, 216, 0.03);
+  font-weight: 700;
+  border-left: 3px solid var(--sim-accent-blue);
+}
+
+.sim-email-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.sim-email-sender {
+  color: var(--sim-accent-blue);
+}
+
+/* Modal form designs */
+.sim-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.sim-modal {
+  background: #0f172a;
+  border: 1px solid var(--sim-border);
+  border-radius: 18px;
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: var(--sim-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sim-modal h2 {
+  background: linear-gradient(135deg, #fff 0%, var(--sim-accent-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  font-size: 1.35rem;
+}
+
+/* Certificate Styles */
+.sim-certificate {
+  background: #fff;
+  border: 10px solid var(--sim-dark-bg);
+  border-radius: 12px;
+  padding: 40px;
+  color: #1e293b;
+  text-align: center;
+  font-family: 'Georgia', serif;
+  box-shadow: var(--sim-shadow);
+  position: relative;
+}
+
+.sim-certificate::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 2px dashed var(--sim-navy-light);
+  pointer-events: none;
+}
+
+.sim-cert-seal {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #d97706;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.65rem;
+  margin: 20px auto 0;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3);
+}
+
+/* ==========================================================================
+   High Fidelity DAT Load Board Light Theme Styling
+   ========================================================================== */
+
+.dat-dashboard-theme {
+  background: #f1f5f9 !important;
+  color: #1e293b !important;
+  padding: 24px !important;
+  border-radius: 16px;
+}
+
+.dat-search-container {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.dat-search-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.dat-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dat-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dat-input-group input, .dat-input-group select {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: #0f172a;
+  font-size: 0.85rem;
+  font-weight: 600;
+  outline: none;
+  transition: all 0.2s;
+  height: 42px;
+  box-sizing: border-box;
+}
+
+.dat-input-group input:focus, .dat-input-group select:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.12);
+}
+
+.dat-width-lg { width: 220px; }
+.dat-width-md { width: 180px; }
+.dat-width-sm { width: 130px; }
+.dat-width-xs { width: 80px; }
+
+.dat-swap-btn:hover {
+  transform: scale(1.15);
+  color: #1d4ed8;
+}
+
+.dat-subfilter-tag {
+  color: #475569;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  transition: all 0.2s;
+}
+
+.dat-subfilter-tag:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Table results list styling */
+.dat-table-container {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.dat-table-header div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dat-load-row-container {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.dat-load-row-grid {
+  display: grid;
+  grid-template-columns: 45px 65px 120px 85px 100px 75px 85px 230px 100px 75px;
+  padding: 14px 20px;
+  font-size: 0.85rem;
+  color: #334155;
+  align-items: center;
+  cursor: pointer;
+  background: white;
+  transition: all 0.2s;
+}
+
+.dat-load-row-grid:hover {
+  background: #f8fafc;
+}
+
+.dat-load-row-container.expanded .dat-load-row-grid {
+  background: #eff6ff;
+  border-left: 4px solid #1d4ed8;
+  font-weight: 700;
+}
+
+.dat-row-rate {
+  font-weight: 800;
+  color: #0f172a;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+.dat-row-rpm {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.dat-row-trip {
+  color: #1d4ed8;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.dat-row-dho {
+  font-weight: 700;
+  color: #475569;
+  display: flex;
+  flex-direction: column;
+}
+
+.dat-row-dhd {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.dat-row-company {
+  font-weight: 700;
+  color: #1d4ed8;
+  display: flex;
+  flex-direction: column;
+}
+
+.dat-row-phone {
+  font-size: 0.75rem;
+  color: #475569;
+  font-weight: 500;
+}
+
+.dat-row-cs {
+  font-weight: 800;
+  color: #1e293b;
+  display: flex;
+  flex-direction: column;
+}
+
+.dat-row-dtp {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* High Fidelity 3-Column Embedded Details Pane */
+.dat-expand-details-pane {
+  background: #ffffff;
+  border-top: 1.5px solid #e2e8f0;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 30px;
+  animation: datFadeIn 0.25s ease-out;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);
+}
+
+@keyframes datFadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dat-details-col {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.dat-details-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 10px 0;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 10px;
+}
+
+/* Vertical Timeline */
+.dat-timeline {
+  position: relative;
+  padding-left: 24px;
+  margin: 10px 0;
+}
+
+.dat-timeline::before {
+  content: "";
+  position: absolute;
+  top: 6px; left: 7px; bottom: 6px; width: 2px;
+  border-left: 2px dotted #94a3b8;
+}
+
+.dat-timeline-node {
+  position: relative;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
+  color: #334155;
+  font-weight: 700;
+}
+
+.dat-timeline-node::before {
+  content: "";
+  position: absolute;
+  left: -22px; top: 3px; width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px #3b82f6;
+}
+
+.dat-timeline-node.dest::before {
+  border-radius: 0%;
+  background: #1e3a8a;
+  box-shadow: 0 0 0 2px #1e3a8a;
+}
+
+.dat-details-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.dat-spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dat-spec-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.dat-spec-value {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* Market Rates Box */
+.dat-rates-card {
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 15px;
+  background: #f8fafc;
+}
+
+/* Factoring Badge */
+.dat-factoring-badge {
+  background: #eff6ff;
+  border: 1.5px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 12px;
+  color: #1e40af;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Action button row */
+.dat-actions-bar {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.dat-actions-bar button {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  box-sizing: border-box;
+}
+
+.dat-actions-bar .btn-call {
+  background: #1d4ed8;
+  color: white;
+}
+
+.dat-actions-bar .btn-email {
+  background: #475569;
+  color: white;
+}
+
+.dat-actions-bar .btn-book {
+  background: #10b981;
+  color: white;
+}
+
+.dat-actions-bar button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ==========================================================================
+   Mobile Responsive Styles
+   ========================================================================== */
+.sim-mobile-hamburger {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  background: var(--sim-accent-blue);
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 180, 216, 0.45);
+  align-items: center;
+  justify-content: center;
+}
+
+.sim-sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 9990;
+}
+
+@media (max-width: 768px) {
+  .sim-mobile-hamburger {
+    display: flex;
+  }
+  
+  .sim-sidebar-overlay.open {
+    display: block;
+  }
+  
+  .sim-sidebar {
+    position: fixed;
+    top: 0;
+    left: -270px;
+    height: 100vh;
+    width: 260px;
+    z-index: 9995;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 5px 0 25px rgba(0,0,0,0.4);
+    background: #070c1b;
+  }
+  
+  .sim-sidebar.open {
+    left: 0;
+  }
+  
+  .sim-viewport {
+    padding: 15px !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Shift header title inside tab view to not block anything */
+  .sim-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 15px !important;
+  }
+  
+  .sim-header h1 {
+    font-size: 1.3rem !important;
+  }
+  
+  .sim-hud-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  
+  /* Stack tables and search widgets */
+  .sim-filters-panel {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .sim-search-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .sim-grid-header {
+    display: none !important; /* Hide table header on mobile */
+  }
+  
+  .sim-load-row {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    border: 1px solid var(--sim-border) !important;
+    border-radius: 8px !important;
+    margin-bottom: 12px !important;
+    padding: 15px !important;
+    background: rgba(255,255,255,0.02) !important;
+  }
+  
+  .sim-load-row > div::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--sim-accent-blue);
+    margin-right: 15px;
+  }
+
+  /* Hide columns that don't have label attribute on mobile */
+  .sim-load-row > div:empty {
+    display: none !important;
+  }
+
+  /* Stack search table rows in index.html */
+  .dat-table-header {
+    display: none !important;
+  }
+  
+  .dat-load-row-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    margin-bottom: 12px !important;
+    padding: 15px !important;
+    background: white !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+  }
+  
+  .dat-load-row-grid > div {
+    display: flex;
+    justify-content: space-between;
+    text-align: right;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 6px;
+  }
+  
+  .dat-load-row-grid > div:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .dat-load-row-grid > div::before {
+    font-weight: 700;
+    color: #475569;
+    margin-right: 15px;
+    text-align: left;
+  }
+
+  .dat-load-row-grid > div:nth-child(1)::before { content: "Select"; }
+  .dat-load-row-grid > div:nth-child(2)::before { content: "Age"; }
+  .dat-load-row-grid > div:nth-child(3)::before { content: "Rate"; }
+  .dat-load-row-grid > div:nth-child(4)::before { content: "Miles"; }
+  .dat-load-row-grid > div:nth-child(5)::before { content: "Origin"; }
+  .dat-load-row-grid > div:nth-child(6)::before { content: "DH-O"; }
+  .dat-load-row-grid > div:nth-child(7)::before { content: "Destination"; }
+  .dat-load-row-grid > div:nth-child(8)::before { content: "DH-D"; }
+  .dat-load-row-grid > div:nth-child(9)::before { content: "Pick Up"; }
+  .dat-load-row-grid > div:nth-child(10)::before { content: "Equipment"; }
+  .dat-load-row-grid > div:nth-child(11)::before { content: "Company"; }
+  .dat-load-row-grid > div:nth-child(12)::before { content: "Phone"; }
+  .dat-load-row-grid > div:nth-child(13)::before { content: "CS / DTP"; }
+}
+
