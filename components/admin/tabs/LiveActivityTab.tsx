@@ -10,11 +10,11 @@ interface Props {
 
 export default function LiveActivityTab({ activities, students, onSync, onViewStudent }: Props) {
   return (
-    <div className="form-grid" style={{ gridTemplateColumns: '1fr 2fr' }}>
+    <div className="form-grid grid-cols-[1fr_2fr]">
       {/* Online Students */}
       <div className="card-admin-sec">
-        <h3 style={{ margin: '0 0 15px 0', color: '#10b981' }}>🟢 Online Students</h3>
-        <p style={{ margin: '0 0 20px 0', fontSize: 13, color: '#475569' }}>
+        <h3 className="m-0 mb-[15px] text-emerald-500">🟢 Online Students</h3>
+        <p className="m-0 mb-5 text-[13px] text-slate-600">
           Currently tracked students interacting with the DAT Simulator.
         </p>
         <table className="table-admin">
@@ -23,24 +23,23 @@ export default function LiveActivityTab({ activities, students, onSync, onViewSt
           </thead>
           <tbody>
             {students.length === 0 ? (
-              <tr><td colSpan={4} style={{ textAlign: 'center', color: '#94a3b8' }}>No active students.</td></tr>
+              <tr><td colSpan={4} className="text-center text-slate-400">No active students.</td></tr>
             ) : students.map(st => (
               <tr key={st.email}>
-                <td style={{ color: '#fff' }}>
-                  <div style={{ fontWeight: 700 }}>{st.name}</div>
-                  <div style={{ fontSize: 11, color: '#64748b' }}>{st.email}</div>
+                <td className="text-white">
+                  <div className="font-bold">{st.name}</div>
+                  <div className="text-[11px] text-slate-500">{st.email}</div>
                 </td>
                 <td>
-                  <span style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '4px 8px', borderRadius: 4, fontSize: 12, fontWeight: 700 }}>
+                  <span className="bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded text-[12px] font-bold">
                     {st.level_info?.title || 'Dispatcher'}
                   </span>
                 </td>
-                <td style={{ color: '#cbd5e1', fontWeight: 700 }}>{st.booked_loads || 0}</td>
+                <td className="text-slate-300 font-bold">{st.booked_loads || 0}</td>
                 <td>
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-primary px-2 py-1 text-[11px] cursor-pointer bg-indigo-500"
                     onClick={() => onViewStudent(st.email)}
-                    style={{ padding: '4px 8px', fontSize: 11, cursor: 'pointer', background: '#6366f1' }}
                   >
                     View Performance
                   </button>
@@ -53,11 +52,11 @@ export default function LiveActivityTab({ activities, students, onSync, onViewSt
 
       {/* Activity Feed */}
       <div className="card-admin-sec">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 }}>
-          <h3 style={{ margin: 0, color: '#0f172a' }}>📡 Real-time Activity Feed</h3>
+        <div className="flex justify-between items-center mb-[15px]">
+          <h3 className="m-0 text-slate-900">📡 Real-time Activity Feed</h3>
           <button
             onClick={onSync}
-            style={{ background: '#334155', border: '1px solid #475569', color: '#0f172a', padding: '5px 10px', borderRadius: 4, cursor: 'pointer' }}
+            className="bg-[#334155] border border-slate-600 text-slate-900 px-[10px] py-[5px] rounded cursor-pointer"
           >
             🔄 Sync Now
           </button>
@@ -68,13 +67,13 @@ export default function LiveActivityTab({ activities, students, onSync, onViewSt
           </thead>
           <tbody>
             {activities.length === 0 ? (
-              <tr><td colSpan={4} style={{ textAlign: 'center', color: '#94a3b8' }}>No recent activity logged.</td></tr>
+              <tr><td colSpan={4} className="text-center text-slate-400">No recent activity logged.</td></tr>
             ) : activities.map((act, i) => (
               <tr key={i}>
-                <td style={{ color: '#cbd5e1', fontSize: 12 }}>{act.time_str}</td>
-                <td style={{ color: '#fff', fontWeight: 600 }}>{act.name || act.email}</td>
-                <td style={{ color: '#38bdf8' }}>{act.action}</td>
-                <td style={{ color: '#94a3b8', fontSize: 12 }}>{act.detail}</td>
+                <td className="text-slate-300 text-[12px]">{act.time_str}</td>
+                <td className="text-white font-semibold">{act.name || act.email}</td>
+                <td className="text-sky-400">{act.action}</td>
+                <td className="text-slate-400 text-[12px]">{act.detail}</td>
               </tr>
             ))}
           </tbody>

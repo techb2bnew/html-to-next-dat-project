@@ -16,21 +16,14 @@ const TABS: { id: AdminTab; label: string; color?: string }[] = [
 
 export default function AdminTabBar({ active, onChange }: Props) {
   return (
-    <div className="admin-tab-bar" style={{ display: 'flex', gap: 12, marginBottom: 24, borderBottom: '1px solid #e2e8f0', paddingBottom: 12 }}>
+    <div className="admin-tab-bar flex gap-3 mb-6 border-b border-slate-200 pb-3">
       {TABS.map(tab => (
         <button
           key={tab.id}
-          className={`btn btn-tab${active === tab.id ? ' active' : ''}`}
+          className={`btn btn-tab${active === tab.id ? ' active' : ''} bg-transparent border border-transparent font-bold text-[14px] cursor-pointer px-3 py-[6px] rounded-md`}
           onClick={() => onChange(tab.id)}
           style={{
-            background: 'transparent',
-            border: '1px solid transparent',
             color: active === tab.id ? undefined : (tab.color ?? '#475569'),
-            fontWeight: 700,
-            fontSize: 14,
-            cursor: 'pointer',
-            padding: '6px 12px',
-            borderRadius: 6,
           }}
         >
           {tab.label}

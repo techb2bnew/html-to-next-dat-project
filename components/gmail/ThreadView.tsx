@@ -17,7 +17,7 @@ export default function ThreadView({ thread, replyBody, replyStatus, onReplyChan
 
   return (
     <div className={styles.threadView}>
-      <div style={{ cursor: 'pointer', marginBottom: 15, color: '#5f6368' }} onClick={onBack}>
+      <div className="cursor-pointer mb-[15px] text-[#5f6368]" onClick={onBack}>
         ← Back
       </div>
 
@@ -34,13 +34,13 @@ export default function ThreadView({ thread, replyBody, replyStatus, onReplyChan
             <div className={styles.messageHeader}>
               <div className={`${styles.avatar} ${avatarExtra}`}>{initial}</div>
               <div>
-                <div style={{ fontWeight: 'bold' }}>
+                <div className="font-bold">
                   {msg.senderName}{' '}
-                  <span style={{ fontWeight: 'normal', fontSize: 12, color: '#5f6368' }}>
+                  <span className="font-normal text-xs text-[#5f6368]">
                     &lt;{msg.senderEmail}&gt;
                   </span>
                 </div>
-                <div style={{ fontSize: 12, color: '#5f6368' }}>
+                <div className="text-xs text-[#5f6368]">
                   to {isMe ? msg.recipientEmail : 'me'}
                 </div>
               </div>
@@ -52,10 +52,10 @@ export default function ThreadView({ thread, replyBody, replyStatus, onReplyChan
       })}
 
       {thread.booked && (
-        <div style={{ marginLeft: 55, marginTop: 15 }}>
+        <div className="ml-[55px] mt-[15px]">
           <button
             onClick={() => onGenerateDoc(thread.agreedRate ?? 2500)}
-            style={{ background: '#0052cc', color: 'white', border: 'none', padding: '8px 15px', borderRadius: 4, cursor: 'pointer' }}
+            className="bg-[#0052cc] text-white border-none px-[15px] py-2 rounded cursor-pointer"
           >
             View Rate Confirmation PDF
           </button>
@@ -63,27 +63,27 @@ export default function ThreadView({ thread, replyBody, replyStatus, onReplyChan
       )}
 
       {!isTrainerThread && (
-        <div className={styles.replyBox} style={{ display: 'flex', alignItems: 'flex-start', gap: 15, paddingLeft: 15 }}>
-          <div className={styles.avatar} style={{ background: '#1a73e8' }}>M</div>
-          <div style={{ flex: 1, border: '1px solid #dadce0', borderRadius: 8, overflow: 'hidden', boxShadow: '0 1px 2px 0 rgba(60,64,67,0.3)', display: 'flex', flexDirection: 'column', background: 'white' }}>
+        <div className={`${styles.replyBox} flex items-start gap-[15px] pl-[15px]`}>
+          <div className={`${styles.avatar} !bg-[#1a73e8]`}>M</div>
+          <div className="flex-1 border border-[#dadce0] rounded-lg overflow-hidden shadow-[0_1px_2px_0_rgba(60,64,67,0.3)] flex flex-col bg-white">
             <textarea
               value={replyBody}
               onChange={e => onReplyChange(e.target.value)}
               placeholder="Reply..."
-              style={{ width: '100%', minHeight: 120, padding: 15, border: 'none', outline: 'none', resize: 'vertical', fontFamily: 'inherit', fontSize: 14, color: '#202124', boxSizing: 'border-box' }}
+              className="w-full min-h-[120px] p-[15px] border-none outline-none resize-y font-inherit text-sm text-[#202124] box-border"
             />
-            <div style={{ padding: '10px 15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+            <div className="px-[15px] py-[10px] flex justify-between items-center">
+              <div className="flex items-center gap-[15px]">
                 <button className={styles.sendBtn} onClick={onSendReply}>Send</button>
-                <span style={{ color: '#5f6368', fontSize: 16, cursor: 'pointer', fontWeight: 'bold', fontFamily: 'serif' }} title="Formatting">A</span>
-                <span style={{ color: '#5f6368', fontSize: 16, cursor: 'pointer' }} title="Attach files">📎</span>
-                <span style={{ color: '#5f6368', fontSize: 16, cursor: 'pointer' }} title="Insert link">🔗</span>
-                <span style={{ color: '#5f6368', fontSize: 16, cursor: 'pointer' }} title="Emoji">😀</span>
+                <span className="text-[#5f6368] text-base cursor-pointer font-bold font-serif" title="Formatting">A</span>
+                <span className="text-[#5f6368] text-base cursor-pointer" title="Attach files">📎</span>
+                <span className="text-[#5f6368] text-base cursor-pointer" title="Insert link">🔗</span>
+                <span className="text-[#5f6368] text-base cursor-pointer" title="Emoji">😀</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
-                <span style={{ color: '#5f6368', fontSize: 12 }}>{replyStatus}</span>
-                <span style={{ color: '#5f6368', fontSize: 18, cursor: 'pointer', fontWeight: 'bold' }}>⋮</span>
-                <span style={{ color: '#5f6368', fontSize: 18, cursor: 'pointer' }}>🗑️</span>
+              <div className="flex items-center gap-[15px]">
+                <span className="text-[#5f6368] text-xs">{replyStatus}</span>
+                <span className="text-[#5f6368] text-lg cursor-pointer font-bold">⋮</span>
+                <span className="text-[#5f6368] text-lg cursor-pointer">🗑️</span>
               </div>
             </div>
           </div>

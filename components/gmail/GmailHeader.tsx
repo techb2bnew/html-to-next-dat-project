@@ -11,7 +11,7 @@ export default function GmailHeader({ onToggleSidebar }: Props) {
       <div className={styles.logoArea}>
         <div className={styles.hamburger} onClick={onToggleSidebar}>☰</div>
         <div className={styles.logo}>
-          <span style={{ color: '#ea4335', fontSize: 24, fontWeight: 'bold', marginRight: 4 }}>M</span>
+          <span className="text-[#ea4335] text-2xl font-bold mr-1">M</span>
           Gmail
         </div>
       </div>
@@ -22,7 +22,7 @@ export default function GmailHeader({ onToggleSidebar }: Props) {
       <div className={styles.profileArea}>
         <span>❓</span>
         <span>⚙️</span>
-        <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#1a73e8', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="w-8 h-8 rounded-full bg-[#1a73e8] text-white flex items-center justify-center">
           B
         </div>
       </div>

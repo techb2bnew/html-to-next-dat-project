@@ -1,7 +1,164 @@
-* {
-  box-sizing: border-box;
+@import "tailwindcss";
+
+/* ─── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+/* ─── DAT Simulator — JS-managed states ─────────────────── */
+/* dat-simulator-page.js uses classList.add/remove on these  */
+
+.dat-view {
+  display: none;
+  height: 100vh;
+  width: 100vw;
 }
-html, body {
-  margin: 0;
-  padding: 0;
+.dat-view.active { display: flex; }
+
+.sub-view {
+  display: none;
+  height: 100%;
+  flex-direction: column;
+  overflow-y: auto;
+  background: #f1f3f8;
 }
+.sub-view.active { display: flex; }
+
+.dat-nav-item.active {
+  color: white !important;
+  background: #1e293b !important;
+  border-left: 4px solid #3b82f6 !important;
+}
+
+.dat-sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(2px);
+  z-index: 45;
+}
+.dat-sidebar-overlay.open { display: block; }
+
+@media (max-width: 1024px) {
+  .dat-sidebar {
+    position: fixed !important;
+    top: 0; left: -260px;
+    height: 100vh;
+    width: 250px !important;
+    min-width: 250px !important;
+    transition: left 0.3s cubic-bezier(0.4,0,0.2,1);
+    z-index: 50;
+    box-shadow: 5px 0 25px rgba(0,0,0,0.3);
+  }
+  .dat-sidebar.open { left: 0 !important; }
+  .dat-sidebar-close-btn { display: block !important; }
+  .dat-mobile-hamburger { display: flex !important; }
+}
+
+/* Custom dropdown — toggled by JS focus/click */
+.custom-dropdown-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 100%;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);
+  z-index: 200;
+  display: none;
+  flex-direction: column;
+  padding: 8px 0;
+}
+.custom-dropdown.open .custom-dropdown-list,
+.custom-dropdown:focus-within .custom-dropdown-list { display: flex; }
+
+.cd-item.active { background: #e0e7ff; }
+
+/* Autocomplete — shown via style.display by JS */
+.autocomplete-list {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  z-index: 100;
+  display: none;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.autocomplete-item { padding: 10px 12px; font-size: 0.85rem; cursor: pointer; border-bottom: 1px solid #f1f5f9; }
+.autocomplete-item:hover { background: #eff6ff; }
+
+/* Table rows — JS injects & toggles these */
+.main-row.active { background: #eff6ff !important; border-left: 3px solid #0044cc; }
+
+.expanded-row-container { background: #ffffff; border-bottom: 2px solid #e2e8f0; }
+.expanded-content { padding: 20px 30px; display: flex; flex-direction: column; gap: 20px; background: #ffffff; border-top: 1px solid #f1f5f9; }
+.expanded-header { display: flex; justify-content: space-between; align-items: center; font-size: 1.2rem; font-weight: 800; color: #1e293b; }
+.expanded-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; }
+.expanded-col { display: flex; flex-direction: column; gap: 20px; }
+.expanded-section { display: flex; flex-direction: column; gap: 10px; }
+.expanded-section h4 { margin: 0; font-size: 0.75rem; color: #64748b; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; display: flex; justify-content: space-between; }
+.info-row { display: flex; justify-content: space-between; font-size: 0.8rem; color: #1e293b; margin-bottom: 4px; }
+.info-label { color: #64748b; width: 120px; }
+.info-val { font-weight: 600; flex: 1; }
+.route-visual { display: flex; gap: 12px; }
+.route-line { display: flex; flex-direction: column; align-items: center; color: #0044cc; }
+.route-line .dot { font-size: 0.7rem; }
+.route-line .line { flex: 1; width: 2px; border-left: 2px dotted #94a3b8; margin: 4px 0; }
+.route-details { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+.route-point { display: flex; flex-direction: column; font-size: 0.85rem; font-weight: 700; }
+
+/* JS-generated recommended match button */
+.recommended-match-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(16,185,129,0.2);
+  outline: none;
+}
+.recommended-match-btn:hover { background: #059669; transform: translateY(-1px); }
+
+/* Flash animation for new loads */
+@keyframes flashGreen {
+  0% { background-color: #ecfdf5; }
+  30% { background-color: #10b981; }
+  100% { background-color: transparent; }
+}
+.new-load-flash { animation: flashGreen 3s ease-out; }
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* ─── Admin — JS-managed states ─────────────────────────── */
+/* admin.js uses classList.add/remove on these               */
+
+.modal.active { display: flex !important; }
+
+.btn-tab.active {
+  background: rgba(99, 102, 241, 0.15) !important;
+  border: 1px solid #6366f1 !important;
+  color: #fff !important;
+}
+
+.modal-tab-btn.active {
+  background: rgba(99,102,241,0.2) !important;
+  border: 1px solid #6366f1 !important;
+  color: #fff !important;
+}
+
+.student-tab-content { display: none; }
+.student-tab-content.active { display: block; }
+
+.hidden { display: none !important; }
+
+.btn-success { background: #16a34a !important; color: white !important; }

@@ -56,35 +56,22 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
   return (
     <>
       {/* Gate overlay */}
-      <div style={{
-        position: 'fixed', inset: 0,
-        background: 'linear-gradient(135deg, #eef2ff, #e0e7ff, #dbeafe)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        zIndex: 999999,
-      }}>
+      <div className="fixed inset-0 bg-gradient-to-br from-[#eef2ff] via-[#e0e7ff] to-[#dbeafe] flex items-center justify-center z-[999999]">
         <div
           id="page-gate-card"
-          style={{
-            background: '#ffffff',
-            borderRadius: 24,
-            padding: '48px 40px',
-            width: '100%',
-            maxWidth: 420,
-            boxShadow: '0 25px 60px rgba(99,102,241,0.18), 0 10px 30px rgba(0,0,0,0.1)',
-            textAlign: 'center',
-            animation: shake ? 'pageGateShake 0.5s ease' : undefined,
-          }}
+          className="bg-white rounded-[24px] px-10 py-12 w-full max-w-[420px] shadow-[0_25px_60px_rgba(99,102,241,0.18),0_10px_30px_rgba(0,0,0,0.1)] text-center"
+          style={{ animation: shake ? 'pageGateShake 0.5s ease' : undefined }}
         >
-          <span style={{ fontSize: 48, display: 'block', marginBottom: 16 }}>🔐</span>
-          <h2 style={{ margin: '0 0 8px 0', fontSize: 22, fontWeight: 800, color: '#1e1b4b' }}>
+          <span className="text-[48px] block mb-4">🔐</span>
+          <h2 className="mt-0 mb-2 text-[22px] font-extrabold text-[#1e1b4b]">
             B2B Dispatcher Academy
           </h2>
-          <p style={{ margin: '0 0 28px 0', color: '#6b7280', fontSize: 14 }}>
+          <p className="mt-0 mb-7 text-[#6b7280] text-[14px]">
             Enter your password to continue
           </p>
 
           <form onSubmit={handleSubmit}>
-            <div style={{ position: 'relative', marginBottom: 16 }}>
+            <div className="relative mb-4">
               <input
                 ref={inputRef}
                 type={showPw ? 'text' : 'password'}
@@ -92,31 +79,14 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
                 onChange={e => setInputVal(e.target.value)}
                 placeholder="Enter password"
                 autoComplete="current-password"
-                style={{
-                  width: '100%',
-                  padding: '14px 50px 14px 18px',
-                  border: '2px solid #e0e7ff',
-                  borderRadius: 12,
-                  fontSize: 16,
-                  outline: 'none',
-                  boxSizing: 'border-box',
-                  background: '#f8faff',
-                  color: '#1e1b4b',
-                  transition: 'border-color 0.2s',
-                }}
-                onFocus={e => (e.target.style.borderColor = '#6366f1')}
-                onBlur={e => (e.target.style.borderColor = '#e0e7ff')}
+                className="w-full px-[18px] py-[14px] pr-[50px] border-2 border-[#e0e7ff] rounded-xl text-[16px] outline-none box-border bg-[#f8faff] text-[#1e1b4b] transition-[border-color] duration-200 focus:border-[#6366f1]"
               />
               <button
                 type="button"
                 onClick={() => setShowPw(v => !v)}
                 aria-label={showPw ? 'Hide password' : 'Show password'}
                 title={showPw ? 'Hide password' : 'Show password'}
-                style={{
-                  position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)',
-                  background: 'none', border: 'none', cursor: 'pointer',
-                  fontSize: 18, padding: 4, lineHeight: 1,
-                }}
+                className="absolute right-[14px] top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer text-[18px] p-1 leading-none"
               >
                 {showPw ? '🙈' : '👁️'}
               </button>
@@ -124,18 +94,7 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
 
             <button
               type="submit"
-              style={{
-                width: '100%',
-                padding: '14px 0',
-                background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-                color: '#fff',
-                border: 'none',
-                borderRadius: 12,
-                fontSize: 16,
-                fontWeight: 700,
-                cursor: 'pointer',
-                letterSpacing: '0.02em',
-              }}
+              className="w-full py-[14px] bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] text-white border-none rounded-xl text-[16px] font-bold cursor-pointer tracking-[0.02em]"
             >
               Unlock Access
             </button>
@@ -147,36 +106,19 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
       {showError && (
         <div
           onClick={e => { if (e.target === e.currentTarget) closeError() }}
-          style={{
-            position: 'fixed', inset: 0,
-            background: 'rgba(0,0,0,0.5)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            zIndex: 1000000,
-          }}
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000000]"
         >
-          <div style={{
-            background: '#fff',
-            borderRadius: 20,
-            padding: '40px 36px',
-            textAlign: 'center',
-            maxWidth: 340,
-            width: '90%',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
-          }}>
-            <span style={{ fontSize: 44, display: 'block', marginBottom: 14 }}>❌</span>
-            <h3 style={{ margin: '0 0 8px 0', color: '#1e1b4b', fontSize: 20, fontWeight: 800 }}>
+          <div className="bg-white rounded-[20px] px-9 py-10 text-center max-w-[340px] w-[90%] shadow-[0_20px_60px_rgba(0,0,0,0.2)]">
+            <span className="text-[44px] block mb-[14px]">❌</span>
+            <h3 className="mt-0 mb-2 text-[#1e1b4b] text-[20px] font-extrabold">
               Wrong Password
             </h3>
-            <p style={{ margin: '0 0 24px 0', color: '#6b7280', fontSize: 14 }}>
+            <p className="mt-0 mb-6 text-[#6b7280] text-[14px]">
               That password is incorrect. Please try again.
             </p>
             <button
               onClick={closeError}
-              style={{
-                background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-                color: '#fff', border: 'none', borderRadius: 10,
-                padding: '12px 32px', fontSize: 15, fontWeight: 700, cursor: 'pointer',
-              }}
+              className="bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] text-white border-none rounded-[10px] px-8 py-3 text-[15px] font-bold cursor-pointer"
             >
               Try Again
             </button>

@@ -43,15 +43,13 @@ export default function ScoreModal({ scores }: Props) {
         </div>
 
         <button
-          className={styles.modeBtn}
-          style={{ background: 'var(--accent-primary)', color: 'white', width: '100%', border: 'none', marginTop: 20 }}
+          className={`${styles.modeBtn} !bg-blue-500 !text-white !w-full !border-none mt-5`}
           onClick={() => window.location.reload()}
         >
           New Simulation
         </button>
         <button
-          className={styles.modeBtn}
-          style={{ background: 'transparent', color: 'var(--text-secondary)', width: '100%', border: 'none', marginTop: 10 }}
+          className={`${styles.modeBtn} !bg-transparent !text-slate-400 !w-full !border-none mt-[10px]`}
           onClick={() => { window.location.href = '/dat-simulator'; }}
         >
           Back to Dashboard

@@ -149,3 +149,26 @@ export async function fetchDatResultsApi() {
 export function getReportUrl(token: string, sessionId: string) {
   return `${base()}/admin/session/report/${sessionId}?token=${token}`;
 }
+
+export async function fetchDatConfigApi() {
+  const res = await fetch(`${base()}/api/sim/admin/config`);
+  return res.json();
+}
+
+export async function saveDatConfigApi(config: { broker_difficulty: string; crisis_frequency: string; market_condition: string }) {
+  const res = await fetch(`${base()}/api/sim/admin/config`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(config),
+  });
+  return res.json();
+}
+
+export async function createCustomChallengeApi(token: string, payload: Record<string, any>) {
+  const res = await fetch(`${base()}/api/challenges/custom`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  });
+  return res.json();
+}

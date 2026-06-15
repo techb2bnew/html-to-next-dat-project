@@ -9,20 +9,17 @@ const tools = [
 
 export default function DatToolsView() {
   return (
-    <div id="dat-view-tools" className="sub-view" style={{ padding: 30 }}>
-      <h2 style={{ fontWeight: 800, fontSize: '1.5rem', margin: '0 0 20px 0' }}>Broker &amp; Carrier Tools</h2>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 20 }}>
-        {tools.map((t) => (
+    <div id="dat-view-tools" className="sub-view p-8">
+      <h2 className="font-extrabold text-2xl m-0 mb-5">Broker &amp; Carrier Tools</h2>
+      <div className="grid gap-5 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
+        {tools.map(t => (
           <div
             key={t.name}
-            style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: 8, padding: 20, textAlign: 'center', cursor: 'pointer', transition: '0.2s' }}
-            onMouseOver={(e) => { (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)' }}
-            onMouseOut={(e) => { (e.currentTarget as HTMLDivElement).style.boxShadow = 'none' }}
+            className="bg-white border border-slate-200 rounded-lg p-5 text-center cursor-pointer transition-shadow duration-200 hover:shadow-lg"
           >
-            <div style={{ fontSize: '3rem', marginBottom: 10 }}>{t.icon}</div>
-            <h3 style={{ margin: '0 0 10px 0', color: '#1e293b' }}>{t.name}</h3>
-            <p style={{ fontSize: '0.85rem', color: '#64748b', margin: 0 }}>{t.desc}</p>
+            <div className="text-5xl mb-2.5">{t.icon}</div>
+            <h3 className="m-0 mb-2.5 text-slate-800">{t.name}</h3>
+            <p className="text-sm text-slate-500 m-0">{t.desc}</p>
           </div>
         ))}
       </div>

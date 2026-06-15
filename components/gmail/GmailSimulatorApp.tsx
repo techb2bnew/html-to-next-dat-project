@@ -202,8 +202,8 @@ export default function GmailSimulatorApp() {
 
         <div className={styles.contentArea}>
           <div className={styles.toolbar}>
-            <span style={{ cursor: 'pointer' }} onClick={() => showFolder(folder)}>⟳ Refresh</span>
-            <span style={{ marginLeft: 'auto' }}>1-50 of 152</span>
+            <span className="cursor-pointer" onClick={() => showFolder(folder)}>⟳ Refresh</span>
+            <span className="ml-auto">1-50 of 152</span>
           </div>
 
           {threadIndex === -1 ? (

@@ -7,20 +7,26 @@ interface Props {
 
 export default function DocumentModal({ content, onClose }: Props) {
   return (
-    <div style={{ display: 'flex', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.5)', zIndex: 9999, justifyContent: 'center', alignItems: 'center' }}>
-      <div style={{ background: '#f4f5f7', width: '90%', maxWidth: 900, height: '90%', borderRadius: 8, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-        <div style={{ background: '#333', color: 'white', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ fontWeight: 'bold' }}>Document Viewer</div>
+    <div className="fixed inset-0 bg-black/50 z-[9999] flex justify-center items-center">
+      <div className="bg-[#f4f5f7] w-[90%] max-w-[900px] h-[90%] rounded-lg flex flex-col overflow-hidden">
+        <div className="bg-[#333] text-white px-5 py-[15px] flex justify-between items-center">
+          <div className="font-bold">Document Viewer</div>
           <div>
-            <button style={{ background: '#0052cc', color: 'white', border: 'none', padding: '5px 15px', borderRadius: 4, marginRight: 10, cursor: 'pointer' }} onClick={() => window.print()}>
+            <button
+              className="bg-[#0052cc] text-white border-none px-[15px] py-[5px] rounded mr-[10px] cursor-pointer"
+              onClick={() => window.print()}
+            >
               Print / Save PDF
             </button>
-            <button style={{ background: 'transparent', color: 'white', border: 'none', cursor: 'pointer', fontSize: 20 }} onClick={onClose}>
+            <button
+              className="bg-transparent text-white border-none cursor-pointer text-xl"
+              onClick={onClose}
+            >
               &times;
             </button>
           </div>
         </div>
-        <div style={{ flex: 1, overflowY: 'auto', padding: 20 }} dangerouslySetInnerHTML={{ __html: content }} />
+        <div className="flex-1 overflow-y-auto p-5" dangerouslySetInnerHTML={{ __html: content }} />
       </div>
     </div>
   );

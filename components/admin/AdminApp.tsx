@@ -421,7 +421,9 @@ export default function AdminApp() {
               <ChallengesTab
                 challenges={challenges}
                 loading={challengesLoading}
+                token={token}
                 onDelete={handleDeleteChallenge}
+                onCreated={loadChallenges}
               />
             )}
             {activeTab === 'analytics' && (

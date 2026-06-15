@@ -13,7 +13,7 @@ export default function SetupModal({ selectedMode, onSelectMode, onStart }: Prop
     <div className={styles.setupModal}>
       <div className={styles.modalContent}>
         <h2>DAT Simulation Initialization</h2>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: 30 }}>
+        <p className="text-slate-400 mb-[30px]">
           Select your role in the upcoming freight negotiation.
         </p>
 
@@ -39,8 +39,7 @@ export default function SetupModal({ selectedMode, onSelectMode, onStart }: Prop
         </div>
 
         <button
-          className={styles.modeBtn}
-          style={{ background: 'var(--accent-success)', color: 'white', width: '100%', border: 'none', marginTop: 10 }}
+          className={`${styles.modeBtn} !bg-emerald-500 !text-white !w-full !border-none mt-[10px]`}
           onClick={onStart}
         >
           Start Simulation

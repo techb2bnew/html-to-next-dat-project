@@ -18,11 +18,7 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
-        <link rel="stylesheet" href="/css/style.css" />
-        <link rel="stylesheet" href="/css/challenges.css" />
-        <link rel="stylesheet" href="/css/simulator.css" />
-        <link rel="stylesheet" href="/css/admin.css" />
-        <link rel="stylesheet" href="/css/dat-simulator.css" />
+        {/* Page-specific CSS is loaded by each app component */}
       </head>
       <body>
         <PasswordGate>

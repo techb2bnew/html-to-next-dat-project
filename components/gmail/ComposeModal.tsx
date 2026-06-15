@@ -18,7 +18,7 @@ export default function ComposeModal({ to, subject, body, onToChange, onSubjectC
     <div className={styles.composeModal}>
       <div className={styles.composeHeader}>
         <span>New Message</span>
-        <span style={{ cursor: 'pointer' }} onClick={onClose}>✖</span>
+        <span className="cursor-pointer" onClick={onClose}>✖</span>
       </div>
       <div className={styles.composeInput}>
         <input type="text" value={to} onChange={e => onToChange(e.target.value)} placeholder="Recipients" />
@@ -31,7 +31,7 @@ export default function ComposeModal({ to, subject, body, onToChange, onSubjectC
       </div>
       <div className={styles.composeFooter}>
         <button className={styles.sendBtn} onClick={onSend}>Send</button>
-        <span style={{ marginLeft: 15, color: '#5f6368', cursor: 'pointer' }} onClick={onDraftTemplate}>
+        <span className="ml-[15px] text-[#5f6368] cursor-pointer" onClick={onDraftTemplate}>
           Auto-Draft Negotiation
         </span>
       </div>

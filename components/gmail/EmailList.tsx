@@ -22,7 +22,7 @@ export default function EmailList({ emails, currentFolder, onOpenThread }: Props
   if (items.length === 0) {
     return (
       <div className={styles.emailList}>
-        <div style={{ textAlign: 'center', padding: 50, color: '#5f6368' }}>
+        <div className="text-center p-[50px] text-[#5f6368]">
           Your {currentFolder} is empty.
         </div>
       </div>
@@ -55,7 +55,7 @@ export default function EmailList({ emails, currentFolder, onOpenThread }: Props
             <div className={styles.emailSubject}>
               <strong>{thread.subject}</strong>
               {' - '}
-              <span style={{ color: '#5f6368', fontWeight: 'normal' }}>
+              <span className="text-[#5f6368] font-normal">
                 {previewBody.substring(0, 80).replace(/\n/g, ' ')}...
               </span>
             </div>

@@ -1,28 +1,46 @@
 'use client'
 
-export default function DatDocModal() {
+interface Props {
+  isOpen: boolean
+  content: string
+  loading: boolean
+  onClose: () => void
+}
+
+export default function DatDocModal({ isOpen, content, loading, onClose }: Props) {
+  if (!isOpen) return null
+
   return (
-    <div id="doc-modal" style={{ display: 'none', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.5)', zIndex: 9999, justifyContent: 'center', alignItems: 'center' }}>
-      <div style={{ background: '#f4f5f7', width: '90%', maxWidth: 900, height: '90%', borderRadius: 8, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-        <div style={{ background: '#333', color: 'white', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ fontWeight: 'bold' }}>Document Viewer</div>
-          <div>
+    <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-[9999]">
+      <div className="bg-[#f4f5f7] w-[90%] max-w-[900px] h-[90%] rounded-lg flex flex-col overflow-hidden">
+        <div className="bg-[#333] text-white px-5 py-4 flex justify-between items-center flex-shrink-0">
+          <div className="font-bold">Document Viewer</div>
+          <div className="flex items-center gap-2">
             <button
-              style={{ background: '#0052cc', color: 'white', border: 'none', padding: '5px 15px', borderRadius: 4, marginRight: 10, cursor: 'pointer' }}
+              className="bg-[#0052cc] text-white border-none px-4 py-1 rounded cursor-pointer"
               onClick={() => window.print()}
             >
               Print / Save PDF
             </button>
             <button
-              style={{ background: 'transparent', color: 'white', border: 'none', cursor: 'pointer', fontSize: 20 }}
-              onClick={() => (window as any).closeDoc?.()}
+              className="bg-transparent text-white border-none cursor-pointer text-xl leading-none"
+              onClick={onClose}
             >
               &times;
             </button>
           </div>
         </div>
-        <div id="doc-content" style={{ flex: 1, overflowY: 'auto', padding: 20 }}>
-          {/* Document renders here */}
+        <div className="flex-1 overflow-y-auto p-5">
+          {loading ? (
+            <div className="flex items-center justify-center h-full text-slate-500">
+              <div className="text-center">
+                <div className="text-4xl mb-4 animate-spin">🔄</div>
+                <div>Generating document...</div>
+              </div>
+            </div>
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: content }} />
+          )}
         </div>
       </div>
     </div>

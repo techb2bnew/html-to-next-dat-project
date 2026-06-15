@@ -1,43 +1,51 @@
 'use client'
 
-export default function DatBookedModal() {
+interface Props {
+  isOpen: boolean
+  scoreBadge: string
+  onClose: () => void
+  onGenerateDoc: (docType: string) => void
+}
+
+export default function DatBookedModal({ isOpen, scoreBadge, onClose, onGenerateDoc }: Props) {
+  if (!isOpen) return null
+
   return (
-    <div id="ai-booked-modal" className="ai-modal-overlay">
-      <div className="ai-modal" style={{ maxWidth: 500 }}>
-        <div className="ai-modal-header" style={{ background: '#10b981' }}>
-          <h3 style={{ margin: 0 }}>🎉 Load Booked Successfully!</h3>
-          <span
-            style={{ cursor: 'pointer', fontSize: '1.2rem' }}
-            onClick={() => { const el = document.getElementById('ai-booked-modal'); if (el) el.style.display = 'none'; }}
-          >✖</span>
+    <div className="fixed inset-0 bg-slate-900/70 flex items-center justify-center z-[1000]">
+      <div className="bg-white rounded-xl w-[90%] max-w-[500px] max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+        <div className="bg-emerald-500 text-white px-5 py-4 flex justify-between items-center">
+          <h3 className="m-0 font-bold">🎉 Load Booked Successfully!</h3>
+          <span className="cursor-pointer text-xl" onClick={onClose}>✖</span>
         </div>
-        <div className="ai-modal-body" style={{ textAlign: 'center' }}>
-          <p style={{ fontSize: '1.1rem', color: '#334155', marginBottom: 20 }}>
-            Congratulations! You successfully negotiated and booked this load. The following documents have been generated:
+
+        <div className="p-5 overflow-y-auto flex-1 text-center">
+          <p className="text-lg text-slate-700 mb-5">
+            Congratulations! You successfully negotiated and booked this load.
           </p>
-          <div id="booked-score-badge"></div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'center' }}>
-            <button
-              className="ai-btn"
-              style={{ width: '80%', background: '#f8fafc', color: '#0f172a', border: '1px solid #cbd5e1' }}
-              onClick={() => (window as any).generateAndShowDoc?.('rate_con')}
-            >
-              📄 Rate Confirmation
-            </button>
-            <button
-              className="ai-btn"
-              style={{ width: '80%', background: '#f8fafc', color: '#0f172a', border: '1px solid #cbd5e1' }}
-              onClick={() => (window as any).generateAndShowDoc?.('setup_packet')}
-            >
-              📄 Broker Setup Packet
-            </button>
-            <button
-              className="ai-btn"
-              style={{ width: '80%', background: '#f8fafc', color: '#0f172a', border: '1px solid #cbd5e1' }}
-              onClick={() => (window as any).generateAndShowDoc?.('dispatch')}
-            >
-              📄 Dispatch Sheet
-            </button>
+
+          {scoreBadge && (
+            <div
+              className="text-2xl font-extrabold mb-5 py-3 px-6 inline-block rounded-lg bg-slate-50 border border-slate-200"
+              dangerouslySetInnerHTML={{ __html: scoreBadge }}
+            />
+          )}
+
+          <p className="text-sm text-slate-500 mb-4">Generate your documents:</p>
+
+          <div className="flex flex-col gap-2.5 items-center">
+            {[
+              { key: 'rate_con', label: '📄 Rate Confirmation' },
+              { key: 'setup_packet', label: '📄 Broker Setup Packet' },
+              { key: 'dispatch', label: '📄 Dispatch Sheet' },
+            ].map(d => (
+              <button
+                key={d.key}
+                className="w-4/5 bg-slate-50 text-slate-900 border border-slate-300 px-4 py-2 rounded font-bold cursor-pointer hover:bg-slate-100"
+                onClick={() => onGenerateDoc(d.key)}
+              >
+                {d.label}
+              </button>
+            ))}
           </div>
         </div>
       </div>

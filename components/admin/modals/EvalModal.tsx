@@ -74,7 +74,7 @@ export default function EvalModal({
                     <div className="answer-body">
                       {ans.answer_text === '[Processing audio...]'
                         ? <div className="processing-glow">Transcribing audio…</div>
-                        : (ans.answer_text || <em style={{ color: '#999' }}>No answer recorded</em>)
+                        : (ans.answer_text || <em className="text-[#999]">No answer recorded</em>)
                       }
                     </div>
                     {audioUrl && <div className="audio-wrap"><audio controls src={audioUrl} /></div>}
@@ -112,7 +112,7 @@ export default function EvalModal({
                         onChange={e => onGradeChange(index, 'score', e.target.value)}
                       />
                     </div>
-                    <div className="grade-input-group" style={{ flex: 1 }}>
+                    <div className="grade-input-group flex-1">
                       <label>Admin Feedback (Optional)</label>
                       <input
                         type="text"
@@ -165,7 +165,7 @@ export default function EvalModal({
         <div className="modal-footer">
           <div className="footer-actions">
             <button className="btn btn-close" onClick={onClose}>Close</button>
-            <button className="btn" style={{ background: '#334155', color: '#0f172a', border: '1px solid #475569' }} onClick={onViewReport}>
+            <button className="btn bg-[#334155] text-slate-900 border border-slate-600" onClick={onViewReport}>
               📄 View Full Performance Report (PDF)
             </button>
             <button className="btn btn-danger" onClick={onDelete}>🗑️ Delete Session</button>

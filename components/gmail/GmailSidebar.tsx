@@ -14,30 +14,30 @@ export default function GmailSidebar({ open, currentFolder, unreadCount, onShowF
   return (
     <div className={`${styles.sidebar} ${open ? styles.open : ''}`}>
       <button className={styles.composeBtn} onClick={onOpenCompose}>
-        <span style={{ fontSize: 20 }}>✎</span> Compose
+        <span className="text-xl">✎</span> Compose
       </button>
 
       <div
         className={`${styles.navItem} ${currentFolder === 'inbox' ? styles.active : ''}`}
         onClick={() => onShowFolder('inbox')}
       >
-        <span style={{ marginRight: 15 }}>📥</span>
+        <span className="mr-[15px]">📥</span>
         Inbox
-        <span style={{ marginLeft: 'auto', fontWeight: 'bold' }}>{unreadCount > 0 ? unreadCount : ''}</span>
+        <span className="ml-auto font-bold">{unreadCount > 0 ? unreadCount : ''}</span>
       </div>
 
       <div className={styles.navItem}>
-        <span style={{ marginRight: 15 }}>⭐</span> Starred
+        <span className="mr-[15px]">⭐</span> Starred
       </div>
       <div className={styles.navItem}>
-        <span style={{ marginRight: 15 }}>🕒</span> Snoozed
+        <span className="mr-[15px]">🕒</span> Snoozed
       </div>
 
       <div
         className={`${styles.navItem} ${currentFolder === 'sent' ? styles.active : ''}`}
         onClick={() => onShowFolder('sent')}
       >
-        <span style={{ marginRight: 15 }}>🚀</span> Sent
+        <span className="mr-[15px]">🚀</span> Sent
       </div>
     </div>
   );

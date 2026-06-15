@@ -43,7 +43,7 @@ export default function SubmissionsTab({ submissions, loading, error, onOpen }: 
                 : '—';
 
               return (
-                <div key={sub.session_id} className="submission-item" onClick={() => onOpen(sub.session_id)} style={{ cursor: 'pointer' }}>
+                <div key={sub.session_id} className="submission-item cursor-pointer" onClick={() => onOpen(sub.session_id)}>
                   <div className="sub-info">
                     <div className="sub-name">{sub.student_name || 'Guest'}</div>
                     <div className="sub-meta">USA Logistics Dispatcher Practice Mode</div>

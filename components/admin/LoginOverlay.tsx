@@ -50,7 +50,7 @@ export default function LoginOverlay({ email, password, error, loading, onEmailC
         </button>
 
         {error && (
-          <div id="login-error" style={{ display: 'block' }}>{error}</div>
+          <div id="login-error" className="block">{error}</div>
         )}
 
         <div className="login-footer">

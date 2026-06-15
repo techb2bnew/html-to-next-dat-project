@@ -1,5 +1,5 @@
-import MainPageApp from '@/components/MainPageApp'
+import AcademyApp from '@/components/academy/AcademyApp'
 
 export default function HomePage() {
-  return <MainPageApp />
+  return <AcademyApp />
 }

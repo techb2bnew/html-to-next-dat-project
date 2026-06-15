@@ -13,36 +13,36 @@ export default function AnalyticsTab({ analytics, loading }: Props) {
 
   return (
     <>
-      <div className="form-grid" style={{ gridTemplateColumns: '1fr 1fr', marginBottom: 24 }}>
-        <div className="card-admin-sec" style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 48, fontWeight: 800, color: '#38bdf8', margin: '0 0 10px 0' }}>
+      <div className="form-grid mb-6 grid-cols-2">
+        <div className="card-admin-sec text-center">
+          <h1 className="text-[48px] font-extrabold text-sky-400 m-0 mb-[10px]">
             {data?.total_attempts ?? 0}
           </h1>
-          <span style={{ color: '#475569', fontWeight: 700, textTransform: 'uppercase', fontSize: 12 }}>
+          <span className="text-slate-600 font-bold uppercase text-[12px]">
             Total AI Challenge Attempts
           </span>
         </div>
-        <div className="card-admin-sec" style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 48, fontWeight: 800, color: '#10b981', margin: '0 0 10px 0' }}>
+        <div className="card-admin-sec text-center">
+          <h1 className="text-[48px] font-extrabold text-emerald-500 m-0 mb-[10px]">
             {data?.avg_score ? `${(data.avg_score * 10).toFixed(0)}%` : '—'}
           </h1>
-          <span style={{ color: '#475569', fontWeight: 700, textTransform: 'uppercase', fontSize: 12 }}>
+          <span className="text-slate-600 font-bold uppercase text-[12px]">
             Global Average Competency
           </span>
         </div>
       </div>
 
-      <div className="form-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
+      <div className="form-grid grid-cols-2">
         <div className="card-admin-sec">
-          <h3 style={{ margin: '0 0 20px 0', color: '#0f172a' }}>⚠️ Hardest Scenarios (Lowest Student Averages)</h3>
+          <h3 className="m-0 mb-5 text-slate-900">⚠️ Hardest Scenarios (Lowest Student Averages)</h3>
           {(!data?.hardest_scenarios || data.hardest_scenarios.length === 0) ? (
-            <p style={{ color: '#94a3b8', fontSize: 13 }}>No failed scenario telemetry recorded yet.</p>
+            <p className="text-slate-400 text-[13px]">No failed scenario telemetry recorded yet.</p>
           ) : (
-            <ul style={{ paddingLeft: 20, color: '#cbd5e1', lineHeight: 1.6 }}>
+            <ul className="pl-5 text-slate-300 leading-[1.6]">
               {data.hardest_scenarios.map((item, i) => (
-                <li key={i} style={{ marginBottom: 8, fontSize: 13, color: '#cbd5e1' }}>
+                <li key={i} className="mb-2 text-[13px] text-slate-300">
                   <strong>{item.title}</strong>: Avg Score:{' '}
-                  <span style={{ color: '#ef4444', fontWeight: 700 }}>{(item.avg_score * 10).toFixed(0)}%</span>
+                  <span className="text-red-400 font-bold">{(item.avg_score * 10).toFixed(0)}%</span>
                   {' '}(Attempts: {item.attempts})
                 </li>
               ))}
@@ -51,17 +51,17 @@ export default function AnalyticsTab({ analytics, loading }: Props) {
         </div>
 
         <div className="card-admin-sec">
-          <h3 style={{ margin: '0 0 20px 0', color: '#0f172a' }}>📊 Student Strengths Heatmap</h3>
+          <h3 className="m-0 mb-5 text-slate-900">📊 Student Strengths Heatmap</h3>
           {(!data?.skill_heatmap || Object.keys(data.skill_heatmap).length === 0) ? (
-            <p style={{ color: '#94a3b8', fontSize: 13 }}>No skill charts telemetry recorded yet.</p>
+            <p className="text-slate-400 text-[13px]">No skill charts telemetry recorded yet.</p>
           ) : (
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            <ul className="list-none p-0 m-0">
               {Object.entries(data.skill_heatmap).map(([skill, val]) => (
-                <li key={skill} style={{ marginBottom: 10 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 4, color: '#cbd5e1' }}>
+                <li key={skill} className="mb-[10px]">
+                  <div className="flex justify-between text-[12px] mb-1 text-slate-300">
                     <span>{skill}</span><strong>{val}%</strong>
                   </div>
-                  <div style={{ width: '100%', height: 6, background: '#1e293b', borderRadius: 3, overflow: 'hidden' }}>
+                  <div className="w-full h-[6px] bg-slate-800 rounded-[3px] overflow-hidden">
                     <div style={{ width: `${val}%`, height: '100%', background: 'linear-gradient(90deg, #6366f1, #38bdf8)', borderRadius: 3 }} />
                   </div>
                 </li>

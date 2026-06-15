@@ -63,23 +63,23 @@ export default function StudentModal({
   const aiReview = student?.ai_review;
 
   return (
-    <div className="student-modal-dark" style={{ display: 'flex' }}>
-      <div style={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 16, width: '95%', maxWidth: 900, maxHeight: '90vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+    <div className="student-modal-dark flex">
+      <div className="bg-slate-800 border border-[#334155] rounded-2xl w-[95%] max-w-[900px] max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
         <div className="student-modal-header-dark">
           <div>
-            <h2 style={{ margin: 0, color: '#f1f5f9', fontSize: 20, fontWeight: 800 }}>
+            <h2 className="m-0 text-slate-50 text-[20px] font-extrabold">
               {student?.name || 'Student Performance'}
             </h2>
-            <div style={{ fontSize: 12, color: '#64748b', marginTop: 2 }}>{student?.email}</div>
+            <div className="text-[12px] text-slate-500 mt-[2px]">{student?.email}</div>
           </div>
-          <button onClick={onClose} style={{ background: '#334155', border: '1px solid #475569', color: '#94a3b8', padding: '6px 12px', borderRadius: 6, cursor: 'pointer', fontSize: 13 }}>
+          <button onClick={onClose} className="bg-[#334155] border border-slate-600 text-slate-400 px-3 py-[6px] rounded-md cursor-pointer text-[13px]">
             ✕ Close
           </button>
         </div>
 
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: 4, padding: '12px 20px', borderBottom: '1px solid #334155', background: '#0f172a', overflowX: 'auto' }}>
+        <div className="flex gap-1 px-5 py-3 border-b border-[#334155] bg-slate-900 overflow-x-auto">
           {TABS.map(t => (
             <button
               key={t.id}
@@ -93,7 +93,7 @@ export default function StudentModal({
 
         {/* Body */}
         <div className="student-modal-body-dark">
-          {loading && <div style={{ textAlign: 'center', padding: 40, color: '#94a3b8' }}>Loading student data…</div>}
+          {loading && <div className="text-center p-10 text-slate-400">Loading student data…</div>}
 
           {!loading && activeTab === 'overview' && (
             <>
@@ -107,9 +107,9 @@ export default function StudentModal({
                   { label: 'Revenue', value: `$${(student?.revenue || 0).toLocaleString()}`, icon: '💰', color: '#f97316' },
                 ].map(stat => (
                   <div key={stat.label} className="student-stat-card" style={{ borderTop: `3px solid ${stat.color}` }}>
-                    <div style={{ fontSize: 24, marginBottom: 4 }}>{stat.icon}</div>
-                    <div style={{ fontSize: 22, fontWeight: 800, color: stat.color }}>{stat.value}</div>
-                    <div style={{ fontSize: 11, color: '#64748b', fontWeight: 600 }}>{stat.label}</div>
+                    <div className="text-[24px] mb-1">{stat.icon}</div>
+                    <div className="text-[22px] font-extrabold" style={{ color: stat.color }}>{stat.value}</div>
+                    <div className="text-[11px] text-slate-500 font-semibold">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -119,16 +119,16 @@ export default function StudentModal({
           {!loading && activeTab === 'timeline' && (
             <div className="student-timeline-container">
               {activities.length === 0
-                ? <p style={{ color: '#475569', textAlign: 'center' }}>No activity recorded yet.</p>
+                ? <p className="text-slate-600 text-center">No activity recorded yet.</p>
                 : activities.map((act: any, i: number) => (
                   <div key={i} className="student-timeline-item">
                     <div className="timeline-dot" />
                     <div className="timeline-content">
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                        <strong style={{ color: '#e2e8f0', fontSize: 13 }}>{act.action}</strong>
-                        <span style={{ fontSize: 11, color: '#475569' }}>{act.time_str}</span>
+                      <div className="flex justify-between items-baseline">
+                        <strong className="text-slate-200 text-[13px]">{act.action}</strong>
+                        <span className="text-[11px] text-slate-600">{act.time_str}</span>
                       </div>
-                      <div style={{ fontSize: 12, color: '#64748b', marginTop: 2 }}>{act.detail}</div>
+                      <div className="text-[12px] text-slate-500 mt-[2px]">{act.detail}</div>
                     </div>
                   </div>
                 ))
@@ -137,26 +137,26 @@ export default function StudentModal({
           )}
 
           {!loading && activeTab === 'loads' && (
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+            <table className="w-full border-collapse text-[13px]">
               <thead>
-                <tr style={{ borderBottom: '1px solid #334155' }}>
+                <tr className="border-b border-[#334155]">
                   {['Date', 'Broker', 'Route', 'Rate', 'Score', 'Grade'].map(h => (
-                    <th key={h} style={{ padding: '8px 10px', color: '#64748b', fontWeight: 700, fontSize: 11, textAlign: 'left' }}>{h}</th>
+                    <th key={h} className="px-[10px] py-2 text-slate-500 font-bold text-[11px] text-left">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {bookedLoads.length === 0
-                  ? <tr><td colSpan={6} style={{ textAlign: 'center', color: '#475569', padding: 20 }}>No booked loads yet.</td></tr>
+                  ? <tr><td colSpan={6} className="text-center text-slate-600 p-5">No booked loads yet.</td></tr>
                   : bookedLoads.map((load: any, i: number) => (
-                    <tr key={i} style={{ borderBottom: '1px solid #1e293b' }}>
-                      <td style={{ padding: '8px 10px', color: '#64748b', fontSize: 11 }}>{load.timestamp_str || ''}</td>
-                      <td style={{ padding: '8px 10px', color: '#cbd5e1' }}>{load.broker_name}</td>
-                      <td style={{ padding: '8px 10px', color: '#94a3b8', fontSize: 12 }}>{load.origin} → {load.destination}</td>
-                      <td style={{ padding: '8px 10px', fontWeight: 700, color: '#10b981' }}>${(load.agreed_rate || 0).toLocaleString()}</td>
-                      <td style={{ padding: '8px 10px', fontWeight: 700 }}>{load.score_pct}%</td>
-                      <td style={{ padding: '8px 10px' }}>
-                        <span style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '2px 6px', borderRadius: 4, fontSize: 10, fontWeight: 700 }}>{load.grade}</span>
+                    <tr key={i} className="border-b border-slate-800">
+                      <td className="px-[10px] py-2 text-slate-500 text-[11px]">{load.timestamp_str || ''}</td>
+                      <td className="px-[10px] py-2 text-slate-300">{load.broker_name}</td>
+                      <td className="px-[10px] py-2 text-slate-400 text-[12px]">{load.origin} → {load.destination}</td>
+                      <td className="px-[10px] py-2 font-bold text-emerald-500">${(load.agreed_rate || 0).toLocaleString()}</td>
+                      <td className="px-[10px] py-2 font-bold">{load.score_pct}%</td>
+                      <td className="px-[10px] py-2">
+                        <span className="bg-emerald-500/10 text-emerald-500 px-[6px] py-[2px] rounded text-[10px] font-bold">{load.grade}</span>
                       </td>
                     </tr>
                   ))
@@ -169,20 +169,20 @@ export default function StudentModal({
             <div>
               {calls.length > 0 && (
                 <>
-                  <h4 style={{ color: '#94a3b8', fontSize: 12, fontWeight: 700, margin: '0 0 12px 0', textTransform: 'uppercase' }}>📞 Phone Calls</h4>
+                  <h4 className="text-slate-400 text-[12px] font-bold m-0 mb-3 uppercase">📞 Phone Calls</h4>
                   {calls.map((call: any, i: number) => (
-                    <div key={i} style={{ background: '#0f172a', border: '1px solid #334155', borderRadius: 8, padding: 12, marginBottom: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div key={i} className="bg-slate-900 border border-[#334155] rounded-lg p-3 mb-[10px] flex justify-between items-center">
                       <div>
-                        <div style={{ fontWeight: 700, color: '#e2e8f0', fontSize: 13 }}>
+                        <div className="font-bold text-slate-200 text-[13px]">
                           📞 Call with {call.broker_name || 'Broker'} — {call.origin || ''} → {call.destination || ''}
                         </div>
-                        <div style={{ fontSize: 11, color: '#475569', marginTop: 2 }}>
-                          {call.timestamp_str} · Score: <span style={{ color: '#10b981', fontWeight: 700 }}>{call.score_pct}%</span> · {call.status}
+                        <div className="text-[11px] text-slate-600 mt-[2px]">
+                          {call.timestamp_str} · Score: <span className="text-emerald-500 font-bold">{call.score_pct}%</span> · {call.status}
                         </div>
                       </div>
                       <button
                         onClick={() => onViewTranscript(`Call – ${call.broker_name}`, formatCallHtml(call))}
-                        style={{ background: '#1e293b', border: '1px solid #334155', color: '#94a3b8', padding: '5px 10px', borderRadius: 4, cursor: 'pointer', fontSize: 11, flexShrink: 0 }}
+                        className="bg-slate-800 border border-[#334155] text-slate-400 px-[10px] py-[5px] rounded cursor-pointer text-[11px] shrink-0"
                       >
                         📜 View
                       </button>
@@ -192,20 +192,20 @@ export default function StudentModal({
               )}
               {emails.length > 0 && (
                 <>
-                  <h4 style={{ color: '#94a3b8', fontSize: 12, fontWeight: 700, margin: '16px 0 12px 0', textTransform: 'uppercase' }}>✉️ Email Threads</h4>
+                  <h4 className="text-slate-400 text-[12px] font-bold mt-4 mb-3 uppercase">✉️ Email Threads</h4>
                   {emails.map((email: any, i: number) => (
-                    <div key={i} style={{ background: '#0f172a', border: '1px solid #334155', borderRadius: 8, padding: 12, marginBottom: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div key={i} className="bg-slate-900 border border-[#334155] rounded-lg p-3 mb-[10px] flex justify-between items-center">
                       <div>
-                        <div style={{ fontWeight: 700, color: '#e2e8f0', fontSize: 13 }}>
+                        <div className="font-bold text-slate-200 text-[13px]">
                           ✉️ Email to {email.broker_name || 'Broker'} — {email.origin || ''} → {email.destination || ''}
                         </div>
-                        <div style={{ fontSize: 11, color: '#475569', marginTop: 2 }}>
-                          {email.timestamp_str} · Score: <span style={{ color: '#a78bfa', fontWeight: 700 }}>{email.score_pct}%</span> · {email.status}
+                        <div className="text-[11px] text-slate-600 mt-[2px]">
+                          {email.timestamp_str} · Score: <span className="text-[#a78bfa] font-bold">{email.score_pct}%</span> · {email.status}
                         </div>
                       </div>
                       <button
                         onClick={() => onViewEmail(`Email – ${email.broker_name}`, formatEmailHtml(email))}
-                        style={{ background: '#1e293b', border: '1px solid #334155', color: '#94a3b8', padding: '5px 10px', borderRadius: 4, cursor: 'pointer', fontSize: 11, flexShrink: 0 }}
+                        className="bg-slate-800 border border-[#334155] text-slate-400 px-[10px] py-[5px] rounded cursor-pointer text-[11px] shrink-0"
                       >
                         📜 View
                       </button>
@@ -214,38 +214,38 @@ export default function StudentModal({
                 </>
               )}
               {calls.length === 0 && emails.length === 0 && (
-                <p style={{ color: '#475569', textAlign: 'center', padding: 20 }}>No role-plays recorded yet.</p>
+                <p className="text-slate-600 text-center p-5">No role-plays recorded yet.</p>
               )}
             </div>
           )}
 
           {!loading && activeTab === 'ai-review' && (
             <div>
-              <div style={{ marginBottom: 16, display: 'flex', justifyContent: 'flex-end' }}>
+              <div className="mb-4 flex justify-end">
                 <button
                   onClick={onTriggerAiReview}
-                  style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', border: 'none', color: '#fff', padding: '8px 18px', borderRadius: 8, cursor: 'pointer', fontWeight: 700, fontSize: 13 }}
+                  className="bg-[linear-gradient(135deg,#6366f1,#8b5cf6)] border-none text-white px-[18px] py-2 rounded-lg cursor-pointer font-bold text-[13px]"
                 >
                   🔄 Generate / Refresh AI Review
                 </button>
               </div>
               {!aiReview ? (
-                <p style={{ color: '#475569', textAlign: 'center', padding: 20 }}>No AI review generated yet. Click the button above.</p>
+                <p className="text-slate-600 text-center p-5">No AI review generated yet. Click the button above.</p>
               ) : (
                 <div className="ai-review-layout">
                   <div className="ai-overall-card">
-                    <div style={{ fontSize: 36, fontWeight: 900, color: '#38bdf8' }}>{aiReview.overall_score ?? '?'}<span style={{ fontSize: 16, color: '#64748b' }}>/10</span></div>
-                    <div style={{ fontWeight: 700, color: '#e2e8f0', marginTop: 4 }}>{aiReview.performance_tier || 'Evaluated'}</div>
+                    <div className="text-[36px] font-black text-sky-400">{aiReview.overall_score ?? '?'}<span className="text-[16px] text-slate-500">/10</span></div>
+                    <div className="font-bold text-slate-200 mt-1">{aiReview.performance_tier || 'Evaluated'}</div>
                   </div>
 
                   {aiReview.competencies && (
                     <div>
-                      <h4 style={{ color: '#64748b', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', margin: '0 0 12px 0' }}>Competencies</h4>
+                      <h4 className="text-slate-500 text-[12px] font-bold uppercase m-0 mb-3">Competencies</h4>
                       {Object.entries(aiReview.competencies).map(([key, val]: any) => (
                         <div key={key} className="competency-item">
                           <div className="competency-header">
-                            <span style={{ color: '#cbd5e1', fontSize: 12 }}>{key.replace(/_/g, ' ')}</span>
-                            <span style={{ color: '#38bdf8', fontWeight: 700, fontSize: 12 }}>{val}/10</span>
+                            <span className="text-slate-300 text-[12px]">{key.replace(/_/g, ' ')}</span>
+                            <span className="text-sky-400 font-bold text-[12px]">{val}/10</span>
                           </div>
                           <div className="competency-bar-bg">
                             <div className="competency-bar-fill" style={{ width: `${val * 10}%` }} />
@@ -257,7 +257,7 @@ export default function StudentModal({
 
                   {aiReview.strengths && aiReview.strengths.length > 0 && (
                     <div>
-                      <h4 style={{ color: '#10b981', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', margin: '16px 0 8px 0' }}>✅ Strengths</h4>
+                      <h4 className="text-emerald-500 text-[12px] font-bold uppercase mt-4 mb-2">✅ Strengths</h4>
                       <ul className="ai-bullet-list">
                         {aiReview.strengths.map((s: string, i: number) => <li key={i}>{s}</li>)}
                       </ul>
@@ -266,7 +266,7 @@ export default function StudentModal({
 
                   {aiReview.improvement_areas && aiReview.improvement_areas.length > 0 && (
                     <div>
-                      <h4 style={{ color: '#f59e0b', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', margin: '16px 0 8px 0' }}>⚠️ Improvement Areas</h4>
+                      <h4 className="text-amber-500 text-[12px] font-bold uppercase mt-4 mb-2">⚠️ Improvement Areas</h4>
                       <ul className="ai-bullet-list">
                         {aiReview.improvement_areas.map((s: string, i: number) => <li key={i}>{s}</li>)}
                       </ul>
@@ -274,9 +274,9 @@ export default function StudentModal({
                   )}
 
                   {aiReview.personalized_tip && (
-                    <div style={{ background: 'rgba(99,102,241,0.1)', border: '1px solid #6366f1', padding: 12, borderRadius: 8, marginTop: 16 }}>
-                      <div style={{ fontWeight: 700, color: '#a5b4fc', fontSize: 12, marginBottom: 6 }}>💡 Personalized Tip</div>
-                      <div style={{ color: '#e2e8f0', fontSize: 13 }}>{aiReview.personalized_tip}</div>
+                    <div className="bg-indigo-500/10 border border-indigo-500 p-3 rounded-lg mt-4">
+                      <div className="font-bold text-[#a5b4fc] text-[12px] mb-[6px]">💡 Personalized Tip</div>
+                      <div className="text-slate-200 text-[13px]">{aiReview.personalized_tip}</div>
                     </div>
                   )}
                 </div>
