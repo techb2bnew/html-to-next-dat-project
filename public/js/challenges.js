@@ -206,32 +206,30 @@ function switchView(viewName) {
         // Call the parent show/hide logic if integrated in index.html
         togglePracticeModeView(true);
     } else if (viewName === "dat-simulator") {
-    const a = document.createElement("a");
-a.href = "/dat-simulator";
-a.target = "_blank";
-a.rel = "opener";
-a.click();
-
-    setTimeout(() => {
-        const dashBtn = document.querySelector(
-            '.academy-tab-btn[data-view="dashboard"]'
-        );
-        if (dashBtn) dashBtn.click();
-    }, 50);
-}
-else if (viewName === "admin-portal") {
-   const a = document.createElement("a");
-a.href = "/admin";
-a.target = "_blank";
-a.rel = "opener";
-a.click();
-    setTimeout(() => {
-        const dashBtn = document.querySelector(
-            '.academy-tab-btn[data-view="dashboard"]'
-        );
-        if (dashBtn) dashBtn.click();
-    }, 50);
-}
+        const a = document.createElement("a");
+        a.href = "/dat-simulator";
+        a.target = "_blank";
+        a.rel = "noopener";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => {
+            const dashBtn = document.querySelector('.academy-tab-btn[data-view="dashboard"]');
+            if (dashBtn) dashBtn.click();
+        }, 50);
+    } else if (viewName === "admin-portal") {
+        const a = document.createElement("a");
+        a.href = "/admin";
+        a.target = "_blank";
+        a.rel = "noopener";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => {
+            const dashBtn = document.querySelector('.academy-tab-btn[data-view="dashboard"]');
+            if (dashBtn) dashBtn.click();
+        }, 50);
+    }
 }
 
 
@@ -1591,3 +1589,15 @@ window.closeBriefingModal = closeBriefingModal;
 window.startActiveChallengeCall = startActiveChallengeCall;
 window.filterCategory = filterCategory;
 window.togglePracticeModeView = togglePracticeModeView;
+window.generateNewDailyChallenge = generateNewDailyChallenge;
+
+// Logout fallback for pages that don't load simulator.js
+window.logoutSimulator = function() {
+    localStorage.removeItem("academy_email");
+    localStorage.removeItem("academy_name");
+    localStorage.removeItem("sim_academy_email");
+    localStorage.removeItem("sim_academy_name");
+    localStorage.removeItem("studentEmail");
+    localStorage.removeItem("studentName");
+    window.location.reload();
+};

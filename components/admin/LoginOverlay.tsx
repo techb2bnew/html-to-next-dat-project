@@ -4,12 +4,13 @@ interface Props {
   email: string;
   password: string;
   error: string;
+  loading: boolean;
   onEmailChange: (v: string) => void;
   onPasswordChange: (v: string) => void;
-  onSubmit: () => void;
+  onLogin: () => void;
 }
 
-export default function LoginOverlay({ email, password, error, onEmailChange, onPasswordChange, onSubmit }: Props) {
+export default function LoginOverlay({ email, password, error, loading, onEmailChange, onPasswordChange, onLogin }: Props) {
   return (
     <div id="login-overlay">
       <div className="login-card">
@@ -40,12 +41,12 @@ export default function LoginOverlay({ email, password, error, onEmailChange, on
             autoComplete="current-password"
             value={password}
             onChange={e => onPasswordChange(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && onSubmit()}
+            onKeyDown={e => e.key === 'Enter' && onLogin()}
           />
         </div>
 
-        <button className="login-btn" onClick={onSubmit}>
-          🔐 Sign In to Admin Panel
+        <button className="login-btn" onClick={onLogin} disabled={loading}>
+          {loading ? 'Signing in...' : '🔐 Sign In to Admin Panel'}
         </button>
 
         {error && (

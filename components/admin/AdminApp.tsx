@@ -406,16 +406,15 @@ export default function AdminApp() {
             onLogout={handleLogout}
           />
 
-          <AdminTabBar activeTab={activeTab} onTabChange={tab => setActiveTab(tab)} />
+          <AdminTabBar active={activeTab} onChange={tab => setActiveTab(tab)} />
 
           <div className="admin-content">
             {activeTab === 'submissions' && (
               <SubmissionsTab
-                sessions={submissions}
+                submissions={submissions}
                 loading={subsLoading}
                 error={subsError}
-                onRefresh={loadSubmissions}
-                onOpenEval={openEvalModal}
+                onOpen={openEvalModal}
               />
             )}
             {activeTab === 'challenges' && (

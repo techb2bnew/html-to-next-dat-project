@@ -22,6 +22,7 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/css/challenges.css" />
         <link rel="stylesheet" href="/css/simulator.css" />
         <link rel="stylesheet" href="/css/admin.css" />
+        <link rel="stylesheet" href="/css/dat-simulator.css" />
       </head>
       <body>
         <PasswordGate>
