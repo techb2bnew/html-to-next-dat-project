@@ -9,6 +9,10 @@ import AcademyDashboardView from '@/components/academy/views/AcademyDashboardVie
 import AcademyLeaderboardView from '@/components/academy/views/AcademyLeaderboardView'
 import PracticeCallPanel from '@/components/academy/PracticeCallPanel'
 
+const tabCls = "bg-transparent border border-transparent text-slate-600 px-[18px] py-[10px] rounded-[10px] font-semibold text-[0.9rem] cursor-pointer transition flex items-center gap-2 hover:text-indigo-600 hover:bg-indigo-500/5"
+const tabActiveCls = "text-indigo-600 bg-gradient-to-br from-indigo-500/10 to-indigo-500/[0.03] border-indigo-600 shadow-[0_0_15px_rgba(99,102,241,0.1)]"
+const hudItemCls = "flex items-center gap-2 bg-black/[0.02] px-[14px] py-[6px] rounded-full border border-black/[0.04] text-[0.85rem] font-semibold whitespace-nowrap"
+
 export default function AcademyApp() {
   const ch = useChallenges()
   const pc = usePracticeCall()
@@ -44,50 +48,48 @@ export default function AcademyApp() {
 
   return (
     <>
-      <link rel="stylesheet" href="/css/style.css" />
-      <link rel="stylesheet" href="/css/challenges.css" />
-      <div className="academy-wrapper">
+      <div className="w-full max-w-[1280px] mx-auto px-5 pt-5 pb-[120px] box-border font-[Inter,sans-serif] text-slate-900">
 
         {/* Mobile header */}
-        <div className="mobile-header hidden">
-          <div className="hamburger">☰</div>
-          <div className="logo">B2B Academy</div>
+        <div className="hidden max-[1024px]:flex items-center p-[15px] bg-slate-900 text-white text-xl fixed top-0 left-0 w-full z-[999] shadow-[0_2px_5px_rgba(0,0,0,0.2)]">
+          <div className="cursor-pointer mr-[15px] p-[5px]">☰</div>
+          <div>B2B Academy</div>
         </div>
 
         {/* Navigation */}
-        <nav className="academy-nav">
-          <div className="academy-tabs">
+        <nav className="flex justify-between items-center bg-white/70 backdrop-blur-xl border border-black/[0.06] rounded-2xl px-6 py-3 mb-[30px] shadow-[0_8px_32px_0_rgba(15,23,42,0.05)] z-10 sticky top-[15px] flex-wrap gap-3">
+          <div className="flex gap-2 flex-wrap">
             <button
-              className={`academy-tab-btn ${ch.view === 'dashboard' ? 'active' : ''}`}
+              className={`${tabCls} ${ch.view === 'dashboard' ? tabActiveCls : ''}`}
               onClick={() => handleNavTab('dashboard')}
             >
               🌐 Academy Hub
             </button>
             <button
-              className="academy-tab-btn"
+              className={tabCls}
               onClick={() => handleNavTab('dat-simulator')}
             >
               🚛 DAT Simulator
             </button>
             <button
-              className={`academy-tab-btn ${ch.view === 'leaderboard' ? 'active' : ''}`}
+              className={`${tabCls} ${ch.view === 'leaderboard' ? tabActiveCls : ''}`}
               onClick={() => handleNavTab('leaderboard')}
             >
               🏆 Rankings &amp; Stats
             </button>
             <button
-              className="academy-tab-btn"
+              className={tabCls}
               onClick={() => handleNavTab('admin-portal')}
             >
               🏢 Admin Portal
             </button>
           </div>
 
-          <div className="academy-hud">
-            <div className="hud-item streak" id="hud-streak-val">🔥 {ch.profile.streak} Days</div>
-            <div className="hud-item xp" id="hud-xp-val">{ch.profile.xp} XP</div>
+          <div className="flex items-center gap-5">
+            <div className={`${hudItemCls} border-amber-500/30 text-amber-700`}>🔥 {ch.profile.streak} Days</div>
+            <div className={`${hudItemCls} border-sky-400/30 text-sky-600`}>{ch.profile.xp} XP</div>
             <button
-              className="hud-item !bg-transparent !text-[#ef4444] !border !border-[#ef4444] !cursor-pointer"
+              className={`${hudItemCls} !bg-transparent !text-[#ef4444] !border !border-[#ef4444] !cursor-pointer`}
               onClick={logout}
             >
               🚪 Logout
@@ -96,40 +98,36 @@ export default function AcademyApp() {
         </nav>
 
         {/* Main content */}
-        <div id="challenges-academy-hub" className={showPractice ? 'hidden' : 'block'}>
+        <div className={showPractice ? 'hidden' : 'block'}>
           {ch.view === 'dashboard' && (
-            <div id="view-dashboard">
-              <AcademyDashboardView
-                challenges={ch.challenges}
-                challengesLoading={ch.challengesLoading}
-                categoryFilter={ch.categoryFilter}
-                onFilterCategory={ch.setCategoryFilter}
-                dailyChallenge={ch.dailyChallenge}
-                dailyLoading={ch.dailyLoading}
-                onGenerateNewDaily={ch.generateNewDaily}
-                onOpenBriefing={ch.openBriefing}
-                leaderboard={ch.leaderboard}
-                studentEmail={ch.profile.email}
-                badgeDefs={ch.BADGE_DEFS}
-                studentBadges={ch.profile.badges}
-                recentActivity={ch.recentActivity}
-              />
-            </div>
+            <AcademyDashboardView
+              challenges={ch.challenges}
+              challengesLoading={ch.challengesLoading}
+              categoryFilter={ch.categoryFilter}
+              onFilterCategory={ch.setCategoryFilter}
+              dailyChallenge={ch.dailyChallenge}
+              dailyLoading={ch.dailyLoading}
+              onGenerateNewDaily={ch.generateNewDaily}
+              onOpenBriefing={ch.openBriefing}
+              leaderboard={ch.leaderboard}
+              studentEmail={ch.profile.email}
+              badgeDefs={ch.BADGE_DEFS}
+              studentBadges={ch.profile.badges}
+              recentActivity={ch.recentActivity}
+            />
           )}
 
           {ch.view === 'leaderboard' && (
-            <div id="view-leaderboards">
-              <AcademyLeaderboardView
-                leaderboard={ch.leaderboard}
-                heatmap={ch.heatmap}
-                studentEmail={ch.profile.email}
-              />
-            </div>
+            <AcademyLeaderboardView
+              leaderboard={ch.leaderboard}
+              heatmap={ch.heatmap}
+              studentEmail={ch.profile.email}
+            />
           )}
         </div>
 
         {/* Standard practice call (broker mode or standalone) */}
-        <div id="standard-practice-wrapper" className={showPractice ? 'block' : 'hidden'}>
+        <div className={showPractice ? 'block' : 'hidden'}>
           <PracticeCallPanel ctx={pc} />
         </div>
 

@@ -191,7 +191,13 @@ export function useChallenges() {
     setChallengesLoading(true)
     try {
       const list = await apiFetchChallenges(email)
-      setChallenges(list)
+      const seen = new Set<string>()
+      const deduped = list.filter((ch: Challenge) => {
+        if (seen.has(ch.challenge_id)) return false
+        seen.add(ch.challenge_id)
+        return true
+      })
+      setChallenges(deduped)
     } catch (e) {
       console.error('[Academy] Challenges load failed:', e)
     } finally {

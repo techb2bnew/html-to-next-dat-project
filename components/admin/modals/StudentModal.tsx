@@ -63,10 +63,10 @@ export default function StudentModal({
   const aiReview = student?.ai_review;
 
   return (
-    <div className="student-modal-dark flex">
+    <div className="fixed inset-0 bg-black/85 flex items-center justify-center z-[10000]">
       <div className="bg-slate-800 border border-[#334155] rounded-2xl w-[95%] max-w-[900px] max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="student-modal-header-dark">
+        <div className="bg-slate-900 border-b border-[#334155] text-white px-6 py-5 flex justify-between items-center">
           <div>
             <h2 className="m-0 text-slate-50 text-[20px] font-extrabold">
               {student?.name || 'Student Performance'}
@@ -83,7 +83,11 @@ export default function StudentModal({
           {TABS.map(t => (
             <button
               key={t.id}
-              className={`modal-tab-btn${activeTab === t.id ? ' active' : ''}`}
+              className={`bg-transparent border font-bold text-[13px] cursor-pointer px-4 py-2 rounded-md transition ${
+                activeTab === t.id
+                  ? 'bg-indigo-500/20 border-indigo-500 text-white'
+                  : 'border-transparent text-slate-600 hover:bg-white/5 hover:text-slate-900'
+              }`}
               onClick={() => onTabChange(t.id)}
             >
               {t.label}
@@ -92,12 +96,12 @@ export default function StudentModal({
         </div>
 
         {/* Body */}
-        <div className="student-modal-body-dark">
+        <div className="bg-[#0b0f19] text-slate-300 p-6 overflow-y-auto flex-1">
           {loading && <div className="text-center p-10 text-slate-400">Loading student data…</div>}
 
           {!loading && activeTab === 'overview' && (
             <>
-              <div className="student-stat-grid">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-4 mb-6">
                 {[
                   { label: 'XP Earned', value: student?.xp || 0, icon: '⚡', color: '#f59e0b' },
                   { label: 'Booked Loads', value: student?.booked_loads || 0, icon: '📦', color: '#10b981' },
@@ -106,7 +110,11 @@ export default function StudentModal({
                   { label: 'Rank', value: student?.level_info?.title || 'Dispatcher', icon: '🏅', color: '#6366f1' },
                   { label: 'Revenue', value: `$${(student?.revenue || 0).toLocaleString()}`, icon: '💰', color: '#f97316' },
                 ].map(stat => (
-                  <div key={stat.label} className="student-stat-card" style={{ borderTop: `3px solid ${stat.color}` }}>
+                  <div
+                    key={stat.label}
+                    className="bg-white border border-slate-200 rounded-[10px] p-5 text-center shadow-[0_4px_10px_rgba(0,0,0,0.2)] transition hover:-translate-y-0.5 hover:border-indigo-600"
+                    style={{ borderTop: `3px solid ${stat.color}` }}
+                  >
                     <div className="text-[24px] mb-1">{stat.icon}</div>
                     <div className="text-[22px] font-extrabold" style={{ color: stat.color }}>{stat.value}</div>
                     <div className="text-[11px] text-slate-500 font-semibold">{stat.label}</div>
@@ -117,13 +125,13 @@ export default function StudentModal({
           )}
 
           {!loading && activeTab === 'timeline' && (
-            <div className="student-timeline-container">
+            <div className="max-h-[400px] overflow-y-auto pr-2">
               {activities.length === 0
                 ? <p className="text-slate-600 text-center">No activity recorded yet.</p>
                 : activities.map((act: any, i: number) => (
-                  <div key={i} className="student-timeline-item">
-                    <div className="timeline-dot" />
-                    <div className="timeline-content">
+                  <div key={i} className="group relative border-l-2 border-[#334155] pl-5 pb-4">
+                    <div className="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-sky-400 border-2 border-[#0b0f19] transition group-hover:bg-violet-400 group-hover:scale-125" />
+                    <div>
                       <div className="flex justify-between items-baseline">
                         <strong className="text-slate-200 text-[13px]">{act.action}</strong>
                         <span className="text-[11px] text-slate-600">{act.time_str}</span>
@@ -232,8 +240,8 @@ export default function StudentModal({
               {!aiReview ? (
                 <p className="text-slate-600 text-center p-5">No AI review generated yet. Click the button above.</p>
               ) : (
-                <div className="ai-review-layout">
-                  <div className="ai-overall-card">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="col-span-full bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-200 rounded-xl p-6 flex items-center justify-between mb-5">
                     <div className="text-[36px] font-black text-sky-400">{aiReview.overall_score ?? '?'}<span className="text-[16px] text-slate-500">/10</span></div>
                     <div className="font-bold text-slate-200 mt-1">{aiReview.performance_tier || 'Evaluated'}</div>
                   </div>
@@ -242,13 +250,13 @@ export default function StudentModal({
                     <div>
                       <h4 className="text-slate-500 text-[12px] font-bold uppercase m-0 mb-3">Competencies</h4>
                       {Object.entries(aiReview.competencies).map(([key, val]: any) => (
-                        <div key={key} className="competency-item">
-                          <div className="competency-header">
+                        <div key={key} className="bg-white border border-slate-200 rounded-lg p-4 mb-3 transition hover:border-slate-600 hover:bg-[#243048]">
+                          <div className="flex justify-between items-center mb-2">
                             <span className="text-slate-300 text-[12px]">{key.replace(/_/g, ' ')}</span>
                             <span className="text-sky-400 font-bold text-[12px]">{val}/10</span>
                           </div>
-                          <div className="competency-bar-bg">
-                            <div className="competency-bar-fill" style={{ width: `${val * 10}%` }} />
+                          <div className="w-full h-2 bg-white rounded overflow-hidden mb-2">
+                            <div className="h-full bg-gradient-to-r from-indigo-500 to-emerald-500 rounded transition-[width] duration-1000 ease-out" style={{ width: `${val * 10}%` }} />
                           </div>
                         </div>
                       ))}
@@ -258,8 +266,8 @@ export default function StudentModal({
                   {aiReview.strengths && aiReview.strengths.length > 0 && (
                     <div>
                       <h4 className="text-emerald-500 text-[12px] font-bold uppercase mt-4 mb-2">✅ Strengths</h4>
-                      <ul className="ai-bullet-list">
-                        {aiReview.strengths.map((s: string, i: number) => <li key={i}>{s}</li>)}
+                      <ul className="m-0 mb-[10px] pl-5 text-slate-300">
+                        {aiReview.strengths.map((s: string, i: number) => <li key={i} className="mb-2 text-[13px]">{s}</li>)}
                       </ul>
                     </div>
                   )}
@@ -267,8 +275,8 @@ export default function StudentModal({
                   {aiReview.improvement_areas && aiReview.improvement_areas.length > 0 && (
                     <div>
                       <h4 className="text-amber-500 text-[12px] font-bold uppercase mt-4 mb-2">⚠️ Improvement Areas</h4>
-                      <ul className="ai-bullet-list">
-                        {aiReview.improvement_areas.map((s: string, i: number) => <li key={i}>{s}</li>)}
+                      <ul className="m-0 mb-[10px] pl-5 text-slate-300">
+                        {aiReview.improvement_areas.map((s: string, i: number) => <li key={i} className="mb-2 text-[13px]">{s}</li>)}
                       </ul>
                     </div>
                   )}

@@ -14,6 +14,8 @@ interface Props {
 
 const inputCls = "bg-[#f8fafc] border border-slate-200 text-slate-900 px-[10px] py-2 rounded-md text-[13px] w-full box-border";
 const labelCls = "text-[12px] font-bold text-slate-600 uppercase tracking-[0.05em] block mb-1";
+const cardCls = "bg-white border border-slate-200 rounded-xl p-6 mb-6 shadow-[0_4px_6px_rgba(0,0,0,0.1)]";
+const tableCls = "w-full border-collapse mt-[15px] [&_th]:text-left [&_td]:text-left [&_th]:p-3 [&_td]:p-3 [&_th]:border-b [&_td]:border-b [&_th]:border-slate-200 [&_td]:border-slate-200 [&_th]:text-[13px] [&_td]:text-[13px] [&_th]:text-slate-600 [&_th]:font-bold [&_th]:bg-white";
 
 export default function ChallengesTab({ challenges, loading, token, onDelete, onCreated }: Props) {
   const [showForm, setShowForm] = useState(false);
@@ -74,7 +76,7 @@ export default function ChallengesTab({ challenges, loading, token, onDelete, on
 
   return (
     <>
-      <div className="card-admin-sec">
+      <div className={cardCls}>
         <h3 className="m-0 mb-[10px] text-slate-900">🧠 Dynamic AI Challenge Engine</h3>
         <p className="m-0 mb-5 text-[13px] text-slate-600">
           The academy now utilizes a 100% dynamic AI generation engine. Challenges, broker personas, logistics details,
@@ -87,7 +89,7 @@ export default function ChallengesTab({ challenges, loading, token, onDelete, on
       </div>
 
       {/* Custom Challenge Creation */}
-      <div className="card-admin-sec mt-6">
+      <div className={`${cardCls} mt-6`}>
         <div className="flex justify-between items-center mb-4">
           <h3 className="m-0 text-slate-900">➕ Create Custom Scenario</h3>
           <button
@@ -189,9 +191,9 @@ export default function ChallengesTab({ challenges, loading, token, onDelete, on
       </div>
 
       {/* Active Scenarios List */}
-      <div className="card-admin-sec mt-6">
+      <div className={`${cardCls} mt-6`}>
         <h3 className="m-0 mb-[15px] text-slate-900">⚙️ Active Dispatch Academy Scenarios</h3>
-        <table className="table-admin">
+        <table className={tableCls}>
           <thead>
             <tr>
               <th>Scenario Title</th>
@@ -213,7 +215,7 @@ export default function ChallengesTab({ challenges, loading, token, onDelete, on
               <tr key={ch.challenge_id}>
                 <td className="font-bold text-white">{ch.title}</td>
                 <td>
-                  <span className="badge badge-completed bg-[rgba(99,102,241,0.2)] text-[#a5b4fc] border border-[rgba(99,102,241,0.3)] text-[10px] font-bold">
+                  <span className="px-[10px] py-1 rounded-full uppercase tracking-[0.05em] bg-[rgba(99,102,241,0.2)] text-[#a5b4fc] border border-[rgba(99,102,241,0.3)] text-[10px] font-bold">
                     {ch.category}
                   </span>
                 </td>
@@ -222,7 +224,7 @@ export default function ChallengesTab({ challenges, loading, token, onDelete, on
                 <td className="text-slate-400">⏱️ {ch.duration} | 🏆 {ch.xp_reward} XP</td>
                 <td>
                   <button
-                    className="btn btn-danger px-2 py-1 text-[11px] bg-red-400 border-none text-white rounded cursor-pointer"
+                    className="font-bold px-2 py-1 text-[11px] bg-red-400 border-none text-white rounded cursor-pointer"
                     onClick={() => onDelete(ch.challenge_id)}
                   >
                     🗑️ Delete

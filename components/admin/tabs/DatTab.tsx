@@ -84,11 +84,13 @@ export default function DatTab({ results, leaderboard, loading, onRefresh, onVie
     pct >= 115 ? '#10b981' : pct >= 100 ? '#3b82f6' : pct >= 90 ? '#f59e0b' : '#ef4444';
 
   const selectCls = "bg-[#f8fafc] border border-slate-200 text-slate-900 px-[10px] py-[7px] rounded-md text-[13px] flex-1 min-w-[180px] cursor-pointer";
+  const cardCls = "bg-white border border-slate-200 rounded-xl p-6 mb-6 shadow-[0_4px_6px_rgba(0,0,0,0.1)]";
+  const tableCls = "w-full border-collapse mt-[15px] [&_th]:text-left [&_td]:text-left [&_th]:p-3 [&_td]:p-3 [&_th]:border-b [&_td]:border-b [&_th]:border-slate-200 [&_td]:border-slate-200 [&_th]:text-[13px] [&_td]:text-[13px] [&_th]:text-slate-600 [&_th]:font-bold [&_th]:bg-white";
 
   return (
     <>
       {/* Engine status */}
-      <div className="card-admin-sec">
+      <div className={cardCls}>
         <h3 className="m-0 mb-[10px] text-slate-900">🚛 DAT Load Board Simulator Engine</h3>
         <p className="m-0 mb-5 text-[13px] text-slate-600">
           The Simulator Engine is now 100% dynamic and AI-driven. All market conditions, broker difficulty,
@@ -101,7 +103,7 @@ export default function DatTab({ results, leaderboard, loading, onRefresh, onVie
       </div>
 
       {/* DAT Settings */}
-      <div className="card-admin-sec mt-6">
+      <div className={`${cardCls} mt-6`}>
         <h3 className="m-0 mb-[6px] text-slate-900">⚙️ Simulator Settings</h3>
         <p className="m-0 mb-5 text-[13px] text-slate-600">
           Configure global market parameters for the DAT dispatcher simulator.
@@ -140,7 +142,7 @@ export default function DatTab({ results, leaderboard, loading, onRefresh, onVie
       </div>
 
       {/* Leaderboard */}
-      <div className="card-admin-sec mt-6">
+      <div className={`${cardCls} mt-6`}>
         <div className="flex justify-between items-center mb-4">
           <h3 className="m-0 text-slate-900">🏆 Negotiation Leaderboard</h3>
           <button onClick={onRefresh} disabled={loading} className="bg-slate-50 border border-slate-300 text-slate-900 px-3 py-[6px] rounded cursor-pointer text-[12px] font-bold">
@@ -150,7 +152,7 @@ export default function DatTab({ results, leaderboard, loading, onRefresh, onVie
         <p className="m-0 mb-4 text-[13px] text-slate-600">
           Students ranked by average negotiation score. &gt;100% means the student negotiated above the listed rate.
         </p>
-        <table className="table-admin">
+        <table className={tableCls}>
           <thead>
             <tr>
               <th className="w-[30px]">#</th><th>Student</th><th>Avg Score</th>
@@ -183,7 +185,7 @@ export default function DatTab({ results, leaderboard, loading, onRefresh, onVie
       </div>
 
       {/* All Results */}
-      <div className="card-admin-sec mt-6">
+      <div className={`${cardCls} mt-6`}>
         <div className="flex justify-between items-center mb-4">
           <h3 className="m-0 text-slate-900">📋 All Negotiation Results</h3>
           <div className="flex gap-2 items-center">
@@ -198,7 +200,7 @@ export default function DatTab({ results, leaderboard, loading, onRefresh, onVie
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="table-admin">
+          <table className={tableCls}>
             <thead>
               <tr>
                 <th>Time</th><th>Type</th><th>Student</th><th>Broker</th>
@@ -236,7 +238,7 @@ export default function DatTab({ results, leaderboard, loading, onRefresh, onVie
                     <td>{statusBadge}</td>
                     <td>
                       <button
-                        className="btn bg-slate-50 border border-slate-300 text-slate-900 px-2 py-1 rounded text-[11px]"
+                        className="font-bold rounded bg-slate-50 border border-slate-300 text-slate-900 px-2 py-1 text-[11px]"
                         onClick={() => onViewEval(r.ai_evaluation || {})}
                       >
                         🤖 View Review

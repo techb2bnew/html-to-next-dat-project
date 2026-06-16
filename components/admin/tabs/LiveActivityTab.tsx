@@ -8,16 +8,19 @@ interface Props {
   onViewStudent: (email: string) => void;
 }
 
+const cardCls = "bg-white border border-slate-200 rounded-xl p-6 shadow-[0_4px_6px_rgba(0,0,0,0.1)]";
+const tableCls = "w-full border-collapse mt-[15px] [&_th]:text-left [&_td]:text-left [&_th]:p-3 [&_td]:p-3 [&_th]:border-b [&_td]:border-b [&_th]:border-slate-200 [&_td]:border-slate-200 [&_th]:text-[13px] [&_td]:text-[13px] [&_th]:text-slate-600 [&_th]:font-bold [&_th]:bg-white";
+
 export default function LiveActivityTab({ activities, students, onSync, onViewStudent }: Props) {
   return (
-    <div className="form-grid grid-cols-[1fr_2fr]">
+    <div className="grid grid-cols-[1fr_2fr] gap-[15px] mt-[15px]">
       {/* Online Students */}
-      <div className="card-admin-sec">
+      <div className={cardCls}>
         <h3 className="m-0 mb-[15px] text-emerald-500">🟢 Online Students</h3>
         <p className="m-0 mb-5 text-[13px] text-slate-600">
           Currently tracked students interacting with the DAT Simulator.
         </p>
-        <table className="table-admin">
+        <table className={tableCls}>
           <thead>
             <tr><th>Student</th><th>Current Rank</th><th>Loads</th><th>Actions</th></tr>
           </thead>
@@ -38,7 +41,7 @@ export default function LiveActivityTab({ activities, students, onSync, onViewSt
                 <td className="text-slate-300 font-bold">{st.booked_loads || 0}</td>
                 <td>
                   <button
-                    className="btn btn-primary px-2 py-1 text-[11px] cursor-pointer bg-indigo-500"
+                    className="font-bold rounded-xl text-white px-2 py-1 text-[11px] cursor-pointer bg-indigo-500"
                     onClick={() => onViewStudent(st.email)}
                   >
                     View Performance
@@ -51,7 +54,7 @@ export default function LiveActivityTab({ activities, students, onSync, onViewSt
       </div>
 
       {/* Activity Feed */}
-      <div className="card-admin-sec">
+      <div className={cardCls}>
         <div className="flex justify-between items-center mb-[15px]">
           <h3 className="m-0 text-slate-900">📡 Real-time Activity Feed</h3>
           <button
@@ -61,7 +64,7 @@ export default function LiveActivityTab({ activities, students, onSync, onViewSt
             🔄 Sync Now
           </button>
         </div>
-        <table className="table-admin">
+        <table className={tableCls}>
           <thead>
             <tr><th>Time</th><th>Student</th><th>Action</th><th>Details</th></tr>
           </thead>

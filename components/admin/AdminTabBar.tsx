@@ -16,11 +16,15 @@ const TABS: { id: AdminTab; label: string; color?: string }[] = [
 
 export default function AdminTabBar({ active, onChange }: Props) {
   return (
-    <div className="admin-tab-bar flex gap-3 mb-6 border-b border-slate-200 pb-3">
+    <div className="flex gap-3 mb-6 border-b border-slate-200 pb-3">
       {TABS.map(tab => (
         <button
           key={tab.id}
-          className={`btn btn-tab${active === tab.id ? ' active' : ''} bg-transparent border border-transparent font-bold text-[14px] cursor-pointer px-3 py-[6px] rounded-md`}
+          className={`font-bold text-[14px] cursor-pointer px-3 py-[6px] rounded-md border ${
+            active === tab.id
+              ? 'bg-indigo-500/15 border-indigo-500 text-white'
+              : 'bg-transparent border-transparent'
+          }`}
           onClick={() => onChange(tab.id)}
           style={{
             color: active === tab.id ? undefined : (tab.color ?? '#475569'),

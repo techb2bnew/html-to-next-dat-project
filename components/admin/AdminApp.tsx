@@ -384,9 +384,7 @@ export default function AdminApp() {
   const apiBase = getApiBase();
 
   return (
-    <div className="admin-app">
-      <link rel="stylesheet" href="/css/admin.css" />
-
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_right,#f1f5f9,#e2e8f0_40%),radial-gradient(circle_at_bottom_left,#e2e8f0,#cbd5e1)] bg-fixed text-slate-900 font-[Inter,system-ui,-apple-system,sans-serif] leading-relaxed p-6 sm:p-8">
       {!isLoggedIn ? (
         <LoginOverlay
           email={loginEmail}
@@ -408,7 +406,7 @@ export default function AdminApp() {
 
           <AdminTabBar active={activeTab} onChange={tab => setActiveTab(tab)} />
 
-          <div className="admin-content">
+          <div className="max-w-[1400px] mx-auto w-full">
             {activeTab === 'submissions' && (
               <SubmissionsTab
                 submissions={submissions}
