@@ -103,20 +103,19 @@ export default function StudentModal({
             <>
               <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-4 mb-6">
                 {[
-                  { label: 'XP Earned', value: student?.xp || 0, icon: '⚡', color: '#f59e0b' },
-                  { label: 'Booked Loads', value: student?.booked_loads || 0, icon: '📦', color: '#10b981' },
-                  { label: 'Calls Made', value: student?.calls_made || 0, icon: '📞', color: '#38bdf8' },
-                  { label: 'Emails Sent', value: student?.emails_sent || 0, icon: '✉️', color: '#a78bfa' },
-                  { label: 'Rank', value: student?.level_info?.title || 'Dispatcher', icon: '🏅', color: '#6366f1' },
-                  { label: 'Revenue', value: `$${(student?.revenue || 0).toLocaleString()}`, icon: '💰', color: '#f97316' },
+                  { label: 'XP Earned', value: student?.xp || 0, icon: '⚡', borderCls: 'border-t-amber-400', textCls: 'text-amber-400' },
+                  { label: 'Booked Loads', value: student?.booked_loads || 0, icon: '📦', borderCls: 'border-t-emerald-500', textCls: 'text-emerald-500' },
+                  { label: 'Calls Made', value: student?.calls_made || 0, icon: '📞', borderCls: 'border-t-sky-400', textCls: 'text-sky-400' },
+                  { label: 'Emails Sent', value: student?.emails_sent || 0, icon: '✉️', borderCls: 'border-t-violet-400', textCls: 'text-violet-400' },
+                  { label: 'Rank', value: student?.level_info?.title || 'Dispatcher', icon: '🏅', borderCls: 'border-t-indigo-500', textCls: 'text-indigo-500' },
+                  { label: 'Revenue', value: `$${(student?.revenue || 0).toLocaleString()}`, icon: '💰', borderCls: 'border-t-orange-500', textCls: 'text-orange-500' },
                 ].map(stat => (
                   <div
                     key={stat.label}
-                    className="bg-white border border-slate-200 rounded-[10px] p-5 text-center shadow-[0_4px_10px_rgba(0,0,0,0.2)] transition hover:-translate-y-0.5 hover:border-indigo-600"
-                    style={{ borderTop: `3px solid ${stat.color}` }}
+                    className={`bg-white border border-slate-200 border-t-[3px] ${stat.borderCls} rounded-[10px] p-5 text-center shadow-[0_4px_10px_rgba(0,0,0,0.2)] transition hover:-translate-y-0.5 hover:border-indigo-600`}
                   >
                     <div className="text-[24px] mb-1">{stat.icon}</div>
-                    <div className="text-[22px] font-extrabold" style={{ color: stat.color }}>{stat.value}</div>
+                    <div className={`text-[22px] font-extrabold ${stat.textCls}`}>{stat.value}</div>
                     <div className="text-[11px] text-slate-500 font-semibold">{stat.label}</div>
                   </div>
                 ))}

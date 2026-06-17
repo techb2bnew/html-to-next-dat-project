@@ -1,6 +1,5 @@
 'use client'
 import type { EmailThread } from '@/lib/types/gmail';
-import styles from '@/app/gmail-simulator/gmail.module.css';
 
 interface Props {
   thread: EmailThread;
@@ -16,23 +15,25 @@ export default function ThreadView({ thread, replyBody, replyStatus, onReplyChan
   const isTrainerThread = thread.messages.some(m => m.role === 'trainer');
 
   return (
-    <div className={styles.threadView}>
+    <div className="flex-1 overflow-y-auto px-[30px] py-5 bg-white max-lg:px-[15px] max-lg:py-[15px]">
       <div className="cursor-pointer mb-[15px] text-[#5f6368]" onClick={onBack}>
         ← Back
       </div>
 
-      <div className={styles.threadSubject}>{thread.subject}</div>
+      <div className="text-[22px] font-normal mb-[25px]">{thread.subject}</div>
 
       {thread.messages.map((msg, i) => {
         const isMe = msg.role === 'user';
         const isTrainer = msg.role === 'trainer';
-        const avatarExtra = isTrainer ? styles.trainer : !isMe ? styles.broker : '';
+        const avatarBg = isTrainer ? 'bg-[#0f9d58]' : !isMe ? 'bg-[#e37400]' : 'bg-[#1a73e8]';
         const initial = isTrainer ? 'T' : isMe ? 'B' : msg.senderName.charAt(0);
 
         return (
-          <div key={i} className={styles.threadMessage}>
-            <div className={styles.messageHeader}>
-              <div className={`${styles.avatar} ${avatarExtra}`}>{initial}</div>
+          <div key={i} className="mb-[30px] border-b border-[#f1f3f4] pb-5">
+            <div className="flex items-center gap-[15px] mb-[15px]">
+              <div className={`w-10 h-10 rounded-full ${avatarBg} text-white flex items-center justify-center text-xl shrink-0`}>
+                {initial}
+              </div>
               <div>
                 <div className="font-bold">
                   {msg.senderName}{' '}
@@ -45,8 +46,7 @@ export default function ThreadView({ thread, replyBody, replyStatus, onReplyChan
                 </div>
               </div>
             </div>
-            {/* broker replies may contain HTML */}
-            <div className={styles.messageBody} dangerouslySetInnerHTML={{ __html: msg.body }} />
+            <div className="ml-[55px] whitespace-pre-wrap leading-[1.5] text-[#202124] max-lg:ml-0 max-lg:mt-[10px]" dangerouslySetInnerHTML={{ __html: msg.body }} />
           </div>
         );
       })}
@@ -63,8 +63,8 @@ export default function ThreadView({ thread, replyBody, replyStatus, onReplyChan
       )}
 
       {!isTrainerThread && (
-        <div className={`${styles.replyBox} flex items-start gap-[15px] pl-[15px]`}>
-          <div className={`${styles.avatar} !bg-[#1a73e8]`}>M</div>
+        <div className="mt-5 mb-[50px] flex items-start gap-[15px] pl-[15px]">
+          <div className="w-10 h-10 rounded-full bg-[#1a73e8] text-white flex items-center justify-center text-xl shrink-0">M</div>
           <div className="flex-1 border border-[#dadce0] rounded-lg overflow-hidden shadow-[0_1px_2px_0_rgba(60,64,67,0.3)] flex flex-col bg-white">
             <textarea
               value={replyBody}
@@ -74,7 +74,12 @@ export default function ThreadView({ thread, replyBody, replyStatus, onReplyChan
             />
             <div className="px-[15px] py-[10px] flex justify-between items-center">
               <div className="flex items-center gap-[15px]">
-                <button className={styles.sendBtn} onClick={onSendReply}>Send</button>
+                <button
+                  className="bg-[#0b57d0] text-white border-none rounded-[18px] px-6 py-[10px] font-medium cursor-pointer hover:bg-[#0842a0]"
+                  onClick={onSendReply}
+                >
+                  Send
+                </button>
                 <span className="text-[#5f6368] text-base cursor-pointer font-bold font-serif" title="Formatting">A</span>
                 <span className="text-[#5f6368] text-base cursor-pointer" title="Attach files">📎</span>
                 <span className="text-[#5f6368] text-base cursor-pointer" title="Insert link">🔗</span>

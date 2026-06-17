@@ -131,11 +131,7 @@ export default function DatTab({ results, leaderboard, loading, onRefresh, onVie
         <button
           onClick={handleSaveConfig}
           disabled={configLoading || saveStatus === 'saving'}
-          className="text-white border-none px-[22px] py-[9px] rounded-md font-bold text-[13px] transition-[background] duration-200"
-          style={{
-            background: saveStatus === 'saved' ? '#10b981' : saveStatus === 'error' ? '#ef4444' : '#6366f1',
-            cursor: configLoading ? 'not-allowed' : 'pointer',
-          }}
+          className={`text-white border-none px-[22px] py-[9px] rounded-md font-bold text-[13px] transition-[background] duration-200 ${saveStatus === 'saved' ? 'bg-emerald-500' : saveStatus === 'error' ? 'bg-red-500' : 'bg-indigo-500'} ${configLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
         >
           {saveStatus === 'saving' ? '⏳ Saving...' : saveStatus === 'saved' ? '✅ Saved!' : saveStatus === 'error' ? '❌ Error' : '💾 Save Settings'}
         </button>

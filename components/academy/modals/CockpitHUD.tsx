@@ -76,11 +76,11 @@ export default function CockpitHUD({ cockpit, onToggleMic, onSubmitText, onDecli
               <div className="font-bold text-[1.1rem] text-white mb-1">{cockpit.callerName}</div>
               <div className="text-[0.75rem] text-slate-400 font-bold uppercase tracking-[0.05em] flex items-center gap-[6px]">{cockpit.roleLabel}</div>
               <div className="bg-black/[0.02] border border-black/[0.04] rounded-xl px-4 py-2 mt-[15px] font-bold flex items-center gap-2 uppercase text-[0.75rem] text-slate-500">
-                State: <strong style={{ color: cockpit.emotionState === 'Listening' ? '#4ade80' : cockpit.emotionState === 'Analyzing' ? '#fbbf24' : '#818cf8' }}>{cockpit.emotionState.toUpperCase()}</strong>
+                State: <strong className={cockpit.emotionState === 'Listening' ? 'text-green-400' : cockpit.emotionState === 'Analyzing' ? 'text-amber-400' : 'text-indigo-400'}>{cockpit.emotionState.toUpperCase()}</strong>
               </div>
               <div className="flex gap-[3px] items-center h-6 mt-3">
                 {[1,2,3,4,5].map(i => (
-                  <span key={i} className="inline-block w-[3px] bg-indigo-600 rounded-[2px] transition-[height] duration-300" style={{ height: cockpit.isProcessing ? 20 : 8 }} />
+                  <span key={i} className={`inline-block w-[3px] bg-indigo-600 rounded-[2px] transition-[height] duration-300 ${cockpit.isProcessing ? 'h-5' : 'h-2'}`} />
                 ))}
               </div>
             </div>
@@ -94,19 +94,17 @@ export default function CockpitHUD({ cockpit, onToggleMic, onSubmitText, onDecli
             {/* Controls */}
             <div className="flex gap-3 items-center w-full mt-auto px-1 pt-[10px] pb-1">
               <button
-                className="w-11 h-11 rounded-full border border-white/15 cursor-pointer text-[1.2rem] flex items-center justify-center flex-shrink-0"
+                className={`w-11 h-11 rounded-full border border-white/15 cursor-pointer text-[1.2rem] flex items-center justify-center flex-shrink-0 ${cockpit.isTtsMuted ? 'bg-red-500/20' : 'bg-white/5'}`}
                 onClick={onToggleMute}
                 title="Toggle speaker"
-                style={{ background: cockpit.isTtsMuted ? 'rgba(239,68,68,0.2)' : 'rgba(255,255,255,0.05)' }}
               >
                 {cockpit.isTtsMuted ? '🔇' : '🔊'}
               </button>
 
               <button
-                className="flex-1 py-3 rounded-[24px] cursor-pointer text-white font-semibold flex items-center justify-center gap-2"
+                className={`flex-1 py-3 rounded-[24px] cursor-pointer text-white font-semibold flex items-center justify-center gap-2 ${cockpit.isRecording ? 'border-2 border-red-500 bg-red-500/15' : 'border border-indigo-500/40 bg-indigo-500/15'}`}
                 onClick={onToggleMic}
                 disabled={cockpit.isProcessing && !cockpit.isRecording}
-                style={{ border: cockpit.isRecording ? '2px solid #ef4444' : '1px solid rgba(99,102,241,0.4)', background: cockpit.isRecording ? 'rgba(239,68,68,0.15)' : 'rgba(99,102,241,0.15)' }}
               >
                 <span>{cockpit.isRecording ? '⏹️' : '🎙️'}</span>
                 <span>{cockpit.isRecording ? 'Stop & Submit' : cockpit.isProcessing ? 'Broker is Speaking...' : 'Tap to Speak'}</span>

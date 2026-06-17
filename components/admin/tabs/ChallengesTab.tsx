@@ -94,8 +94,7 @@ export default function ChallengesTab({ challenges, loading, token, onDelete, on
           <h3 className="m-0 text-slate-900">➕ Create Custom Scenario</h3>
           <button
             onClick={() => { setShowForm(f => !f); setFormError(''); }}
-            className="border border-indigo-500 px-[14px] py-[6px] rounded-md font-bold text-[12px] cursor-pointer"
-            style={{ background: showForm ? '#f1f5f9' : '#6366f1', color: showForm ? '#6366f1' : '#fff' }}
+            className={`border border-indigo-500 px-[14px] py-[6px] rounded-md font-bold text-[12px] cursor-pointer ${showForm ? 'bg-slate-100 text-indigo-500' : 'bg-indigo-500 text-white'}`}
           >
             {showForm ? '✕ Cancel' : '+ New Scenario'}
           </button>
@@ -180,8 +179,7 @@ export default function ChallengesTab({ challenges, loading, token, onDelete, on
               <button
                 onClick={handleCreate}
                 disabled={saving}
-                className="bg-indigo-500 text-white border-none px-6 py-[9px] rounded-md font-bold text-[13px]"
-                style={{ cursor: saving ? 'not-allowed' : 'pointer' }}
+                className={`bg-indigo-500 text-white border-none px-6 py-[9px] rounded-md font-bold text-[13px] ${saving ? 'cursor-not-allowed' : 'cursor-pointer'}`}
               >
                 {saving ? '⏳ Saving...' : '✅ Create Scenario'}
               </button>

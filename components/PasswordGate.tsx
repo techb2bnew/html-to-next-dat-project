@@ -59,8 +59,7 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
       <div className="fixed inset-0 bg-gradient-to-br from-[#eef2ff] via-[#e0e7ff] to-[#dbeafe] flex items-center justify-center z-[999999]">
         <div
           id="page-gate-card"
-          className="bg-white rounded-[24px] px-10 py-12 w-full max-w-[420px] shadow-[0_25px_60px_rgba(99,102,241,0.18),0_10px_30px_rgba(0,0,0,0.1)] text-center"
-          style={{ animation: shake ? 'pageGateShake 0.5s ease' : undefined }}
+          className={`bg-white rounded-[24px] px-10 py-12 w-full max-w-[420px] shadow-[0_25px_60px_rgba(99,102,241,0.18),0_10px_30px_rgba(0,0,0,0.1)] text-center ${shake ? 'animate-[pageGateShake_0.5s_ease]' : ''}`}
         >
           <span className="text-[48px] block mb-4">🔐</span>
           <h2 className="mt-0 mb-2 text-[22px] font-extrabold text-[#1e1b4b]">
@@ -126,16 +125,6 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
         </div>
       )}
 
-      {/* Shake keyframes */}
-      <style>{`
-        @keyframes pageGateShake {
-          10%, 90% { transform: translateX(-4px); }
-          20%, 80% { transform: translateX(6px); }
-          30%, 50%, 70% { transform: translateX(-6px); }
-          40%, 60% { transform: translateX(6px); }
-          100% { transform: translateX(0); }
-        }
-      `}</style>
     </>
   )
 }

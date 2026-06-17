@@ -69,7 +69,7 @@ export default function AnalyticsTab({ analytics, loading }: Props) {
                     <span>{skill}</span><strong>{val}%</strong>
                   </div>
                   <div className="w-full h-[6px] bg-slate-800 rounded-[3px] overflow-hidden">
-                    <div style={{ width: `${val}%`, height: '100%', background: 'linear-gradient(90deg, #6366f1, #38bdf8)', borderRadius: 3 }} />
+                    <div className="h-full bg-gradient-to-r from-indigo-500 to-sky-400 rounded-[3px]" style={{ width: `${val}%` }} />
                   </div>
                 </li>
               ))}

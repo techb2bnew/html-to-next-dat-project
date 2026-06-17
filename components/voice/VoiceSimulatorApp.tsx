@@ -6,7 +6,6 @@ import { getApiBase } from '@/lib/config';
 import SetupModal from './SetupModal';
 import ScoreModal from './ScoreModal';
 import Dashboard from './Dashboard';
-import styles from '@/app/voice-simulator/voice.module.css';
 
 export default function VoiceSimulatorApp() {
   const [phase, setPhase] = useState<CallPhase>('setup');
@@ -348,7 +347,13 @@ export default function VoiceSimulatorApp() {
   }, [initializeDirectCall]);
 
   return (
-    <div className={styles.voiceRoot}>
+    <div
+      className="bg-[#0b0f19] text-slate-50 h-screen overflow-hidden flex flex-col"
+      style={{
+        fontFamily: "'Inter', sans-serif",
+        backgroundImage: 'radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%)',
+      }}
+    >
       {phase === 'setup' && (
         <SetupModal
           selectedMode={selectedMode}

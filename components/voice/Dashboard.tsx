@@ -3,7 +3,6 @@ import type { SimulationState, TimelineEvent, TranscriptMessage } from '@/lib/ty
 import TimelinePanel from './TimelinePanel';
 import CallPanel from './CallPanel';
 import TranscriptPanel from './TranscriptPanel';
-import styles from '@/app/voice-simulator/voice.module.css';
 
 interface Props {
   simState: SimulationState | null;
@@ -20,7 +19,7 @@ interface Props {
 
 export default function Dashboard(props: Props) {
   return (
-    <div className={styles.dashboard}>
+    <div className="grid flex-1 p-5 gap-5 max-w-[1400px] mx-auto w-full grid-cols-[1fr_400px_1fr] h-full min-h-0 max-lg:grid-cols-1 max-lg:p-0 max-lg:gap-0 max-lg:h-screen">
       <TimelinePanel events={props.timelineEvents} />
       <CallPanel
         simState={props.simState}

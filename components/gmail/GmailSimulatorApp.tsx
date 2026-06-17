@@ -8,7 +8,6 @@ import EmailList from './EmailList';
 import ThreadView from './ThreadView';
 import ComposeModal from './ComposeModal';
 import DocumentModal from './DocumentModal';
-import styles from '@/app/gmail-simulator/gmail.module.css';
 
 function getStudentEmail() {
   return localStorage.getItem('studentEmail') || localStorage.getItem('sim_academy_email') || 'student@dispatcheracademy.com';
@@ -184,12 +183,12 @@ export default function GmailSimulatorApp() {
   const unreadCount = emails.filter(t => t.messages.some(m => m.role !== 'user') && !t.read).length;
 
   return (
-    <div className={styles.gmailRoot}>
+    <div className="font-[Roboto,Arial,sans-serif] bg-[#f6f8fc] h-screen overflow-hidden flex flex-col">
       <GmailHeader onToggleSidebar={() => setSidebarOpen(p => !p)} />
 
-      <div className={styles.mainContainer}>
+      <div className="flex flex-1 overflow-hidden">
         <div
-          className={`${styles.sidebarOverlay} ${sidebarOpen ? styles.overlayActive : ''}`}
+          className={`hidden fixed inset-0 bg-black/40 z-[90] max-lg:block max-lg:transition-opacity max-lg:duration-300 ${sidebarOpen ? 'max-lg:opacity-100 max-lg:pointer-events-auto' : 'max-lg:opacity-0 max-lg:pointer-events-none'}`}
           onClick={() => setSidebarOpen(false)}
         />
         <GmailSidebar
@@ -200,8 +199,8 @@ export default function GmailSimulatorApp() {
           onOpenCompose={() => setComposeOpen(true)}
         />
 
-        <div className={styles.contentArea}>
-          <div className={styles.toolbar}>
+        <div className="flex-1 bg-white rounded-2xl mr-[15px] mb-[15px] overflow-hidden flex flex-col shadow-[0_1px_2px_0_rgba(60,64,67,0.3)]">
+          <div className="p-[15px] border-b border-[#f1f3f4] flex items-center gap-[15px] text-[#5f6368] text-sm shrink-0">
             <span className="cursor-pointer" onClick={() => showFolder(folder)}>⟳ Refresh</span>
             <span className="ml-auto">1-50 of 152</span>
           </div>
